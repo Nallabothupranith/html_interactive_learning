@@ -1477,6 +1477,45 @@
       "activity_details": "Trace the faces of 3D objects (chalk box, bottle cap, etc.) to identify 2D shapes."
     },
     {
+      "class": "VIII",
+      "subject": "Mathematics",
+      "topic": "Linear Equations",
+      "activity_name": "Linear Equations Balance Lab",
+      "activity_details": "Use a balance model to solve equations of the form ax + b = c by adjusting x and observing both sides.",
+      "activity_path": [
+        {
+          "label": "Balance Lab",
+          "path": "activities/linear-equations-balance/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VIII",
+      "subject": "Mathematics",
+      "topic": "Exponents and Powers",
+      "activity_name": "Powers and Exponents Pattern Lab",
+      "activity_details": "Build powers with base and exponent sliders, expand repeated multiplication, and compare growth patterns.",
+      "activity_path": [
+        {
+          "label": "Pattern Lab",
+          "path": "activities/powers-pattern-lab/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VIII",
+      "subject": "Mathematics",
+      "topic": "Mensuration",
+      "activity_name": "Mensuration Area Lab",
+      "activity_details": "Change dimensions of rectangles, parallelograms, trapeziums, and circles to connect shapes with area formulas.",
+      "activity_path": [
+        {
+          "label": "Area Lab",
+          "path": "activities/mensuration-area-lab/index.html"
+        }
+      ]
+    },
+    {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Geometry",
