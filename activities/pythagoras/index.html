@@ -142,6 +142,51 @@
         .slider-group .side-label { font-weight: 700; }
         .slider-group.label-a .side-label { color: #d45c4c; }
         .slider-group.label-b .side-label { color: #4a8c6f; }
+        .side-controls {
+            display: grid;
+            grid-template-columns: 42px minmax(86px, 1fr) 42px;
+            gap: 8px;
+            align-items: center;
+            margin-top: 8px;
+        }
+        .side-controls button {
+            width: 42px;
+            height: 38px;
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(26,90,122,0.16);
+            transition: 0.15s;
+        }
+        .side-controls button:hover {
+            transform: translateY(-1px);
+        }
+        .label-a .side-controls button {
+            background: linear-gradient(135deg, #b9473a, #d45c4c);
+        }
+        .label-b .side-controls button {
+            background: linear-gradient(135deg, #3f755e, #4a8c6f);
+        }
+        .side-controls input[type="number"] {
+            width: 100%;
+            height: 38px;
+            border-radius: 12px;
+            border: 2px solid #c5dce8;
+            background: #fff;
+            color: #1a4052;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            outline: none;
+        }
+        .side-controls input[type="number"]:focus {
+            border-color: #2d8cb4;
+            box-shadow: 0 0 0 4px rgba(45,140,180,0.12);
+        }
 
         /* ── Formula box (hint only) ── */
         .formula-box {
@@ -345,6 +390,11 @@
                         <span class="val" id="valA">3.0</span>
                     </label>
                     <input type="range" id="sliderA" min="0.5" max="8" step="0.1" value="3" />
+                    <div class="side-controls" aria-label="Adjust side a">
+                        <button type="button" class="step-btn" data-target="A" data-step="-0.1" aria-label="Decrease side a">−</button>
+                        <input type="number" id="numberA" min="0.5" max="8" step="0.1" value="3" aria-label="Side a value" />
+                        <button type="button" class="step-btn" data-target="A" data-step="0.1" aria-label="Increase side a">+</button>
+                    </div>
                 </div>
                 <div class="slider-group label-b">
                     <label>
@@ -352,6 +402,11 @@
                         <span class="val" id="valB">4.0</span>
                     </label>
                     <input type="range" id="sliderB" min="0.5" max="8" step="0.1" value="4" />
+                    <div class="side-controls" aria-label="Adjust side b">
+                        <button type="button" class="step-btn" data-target="B" data-step="-0.1" aria-label="Decrease side b">−</button>
+                        <input type="number" id="numberB" min="0.5" max="8" step="0.1" value="4" aria-label="Side b value" />
+                        <button type="button" class="step-btn" data-target="B" data-step="0.1" aria-label="Increase side b">+</button>
+                    </div>
                 </div>
                 <!-- c slider is hidden – we don't show c -->
             </div>
@@ -419,6 +474,8 @@
         const ctx = canvas.getContext('2d');
         const sliderA = document.getElementById('sliderA');
         const sliderB = document.getElementById('sliderB');
+        const numberA = document.getElementById('numberA');
+        const numberB = document.getElementById('numberB');
         const valA = document.getElementById('valA');
         const valB = document.getElementById('valB');
         const a2display = document.getElementById('a2display');
@@ -445,6 +502,34 @@
 
         // ─── Helpers ───
         function round2(v) { return Math.round(v * 100) / 100; }
+        function clampSide(v) {
+            const min = 0.5;
+            const max = 8;
+            return Math.min(max, Math.max(min, Math.round(v * 10) / 10));
+        }
+
+        function clearRevealAfterSideChange() {
+            if (!revealed) return;
+            revealed = false;
+            Object.values(feedbacks).forEach(f => { f.textContent = ''; f.className = 'feedback'; });
+        }
+
+        function setSide(side, value) {
+            if (!Number.isFinite(value)) {
+                updateAll();
+                return;
+            }
+            const next = clampSide(value);
+            if (side === 'A') {
+                sliderA.value = next.toFixed(1);
+                numberA.value = next.toFixed(1);
+            } else {
+                sliderB.value = next.toFixed(1);
+                numberB.value = next.toFixed(1);
+            }
+            clearRevealAfterSideChange();
+            updateAll();
+        }
 
         function updateC() {
             c = Math.sqrt(a * a + b * b);
@@ -575,6 +660,8 @@
 
             valA.textContent = a.toFixed(1);
             valB.textContent = b.toFixed(1);
+            numberA.value = a.toFixed(1);
+            numberB.value = b.toFixed(1);
 
             const a2 = a * a, b2 = b * b, sum = a2 + b2;
             a2display.textContent = a2.toFixed(2);
@@ -638,24 +725,28 @@
 
         // ─── Event listeners ───
         sliderA.addEventListener('input', function() {
-            // If sliders change, reset reveal state and clear feedbacks?
-            // We keep revealed state, but we should update c and redraw.
-            // However, if they change sliders after reveal, we might want to keep revealed? Better to reset reveal.
-            // But that might be annoying. Let's reset reveal only if they manually change sliders after reveal? 
-            // For simplicity, we reset reveal when sliders change to keep the challenge fresh.
-            if (revealed) {
-                revealed = false;
-                // Clear all feedbacks
-                Object.values(feedbacks).forEach(f => { f.textContent = ''; f.className = 'feedback'; });
-            }
-            updateAll();
+            setSide('A', parseFloat(this.value));
         });
         sliderB.addEventListener('input', function() {
-            if (revealed) {
-                revealed = false;
-                Object.values(feedbacks).forEach(f => { f.textContent = ''; f.className = 'feedback'; });
-            }
-            updateAll();
+            setSide('B', parseFloat(this.value));
+        });
+        numberA.addEventListener('change', function() {
+            setSide('A', parseFloat(this.value));
+        });
+        numberB.addEventListener('change', function() {
+            setSide('B', parseFloat(this.value));
+        });
+        numberA.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') setSide('A', parseFloat(this.value));
+        });
+        numberB.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') setSide('B', parseFloat(this.value));
+        });
+        document.querySelectorAll('.step-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const slider = this.dataset.target === 'A' ? sliderA : sliderB;
+                setSide(this.dataset.target, parseFloat(slider.value) + parseFloat(this.dataset.step));
+            });
         });
 
         document.querySelectorAll('.check-btn').forEach(btn => {
@@ -686,6 +777,8 @@
             const newB = round2(0.5 + Math.random() * 7);
             sliderA.value = newA;
             sliderB.value = newB;
+            numberA.value = newA;
+            numberB.value = newB;
             updateAll();
         });
 
