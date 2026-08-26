@@ -274,10 +274,10 @@
       gap: 8px;
       min-height: 42px;
       padding: 0 14px;
+      border: 0;
       border-radius: 8px;
       background: var(--brand);
       color: #fff;
-      text-decoration: none;
       font-weight: 800;
     }
 
@@ -289,6 +289,100 @@
       color: var(--muted);
       font-weight: 700;
       font-size: 0.92rem;
+    }
+
+    .variation-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .variation-list .launch {
+      min-height: 38px;
+      font-size: 0.9rem;
+    }
+
+    .viewer {
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin: 18px 0;
+      overflow: hidden;
+    }
+
+    .viewer.is-open {
+      display: block;
+    }
+
+    .viewer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfe;
+    }
+
+    .viewer-title {
+      min-width: 0;
+    }
+
+    .viewer-title strong,
+    .viewer-title span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .viewer-title strong {
+      font-size: 1rem;
+    }
+
+    .viewer-title span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-top: 2px;
+    }
+
+    .viewer-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .viewer-action {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--brand-dark);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .viewer-action:hover {
+      border-color: #9cc9d7;
+      background: #edf8fb;
+    }
+
+    .viewer-frame-wrap {
+      width: 100%;
+      height: clamp(520px, 74vh, 860px);
+      background: #111827;
+    }
+
+    .viewer iframe {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
     }
 
     .pagination {
@@ -339,6 +433,14 @@
       margin-bottom: 6px;
     }
 
+    footer {
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 28px;
+      padding-top: 18px;
+      font-size: 0.92rem;
+    }
+
     @media (max-width: 860px) {
       header,
       .result-bar {
@@ -352,6 +454,10 @@
 
       .filter-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .viewer-frame-wrap {
+        height: clamp(500px, 72vh, 760px);
       }
     }
 
@@ -373,6 +479,25 @@
       .cards {
         grid-template-columns: 1fr;
       }
+
+      .viewer-bar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .viewer-actions {
+        width: 100%;
+      }
+
+      .viewer-action {
+        flex: 1;
+        text-align: center;
+      }
+
+      .viewer-frame-wrap {
+        height: 72vh;
+        min-height: 460px;
+      }
     }
   </style>
 </head>
@@ -381,7 +506,7 @@
     <header>
       <div>
         <h1>Interactive Learning Activities</h1>
-        <p class="lede">Browse the activity catalog by class, subject, and topic, with launch links for activities that already have HTML experiences.</p>
+        <p class="lede">Browse the activity catalog by class, subject, and topic, then open any available variation without leaving the catalog.</p>
       </div>
       <div class="stats" aria-live="polite">
         <div class="stat">
@@ -441,6 +566,22 @@
       <span id="pageSummary"></span>
     </div>
 
+    <section id="activityViewer" class="viewer" aria-live="polite">
+      <div class="viewer-bar">
+        <div class="viewer-title">
+          <strong id="viewerActivity">Activity viewer</strong>
+          <span id="viewerVariation">Choose a variation to begin.</span>
+        </div>
+        <div class="viewer-actions">
+          <a id="viewerExternal" class="viewer-action" href="#" target="_blank" rel="noopener">Open tab</a>
+          <button id="viewerClose" class="viewer-action" type="button">Close</button>
+        </div>
+      </div>
+      <div class="viewer-frame-wrap">
+        <iframe id="activityFrame" title="Selected activity" loading="lazy"></iframe>
+      </div>
+    </section>
+
     <section id="cards" class="cards" aria-live="polite"></section>
 
     <div id="emptyState" class="empty">
@@ -449,6 +590,10 @@
     </div>
 
     <nav id="pagination" class="pagination" aria-label="Activity pages"></nav>
+
+    <footer>
+      Interactive Learning Activities. Use filters to find an activity, then choose a variation to run it inside this page.
+    </footer>
   </main>
 
   <script>
@@ -479,7 +624,13 @@
       resultSummary: document.querySelector("#resultSummary"),
       pageSummary: document.querySelector("#pageSummary"),
       availableCount: document.querySelector("#availableCount"),
-      totalCount: document.querySelector("#totalCount")
+      totalCount: document.querySelector("#totalCount"),
+      activityViewer: document.querySelector("#activityViewer"),
+      viewerActivity: document.querySelector("#viewerActivity"),
+      viewerVariation: document.querySelector("#viewerVariation"),
+      viewerExternal: document.querySelector("#viewerExternal"),
+      viewerClose: document.querySelector("#viewerClose"),
+      activityFrame: document.querySelector("#activityFrame")
     };
 
     fetch("list.json")
@@ -497,7 +648,7 @@
           topic: activity.topic || "Unspecified",
           name: activity.activity_name || "Untitled activity",
           details: activity.activity_details || "",
-          path: activity.activity_path || activity.file_path || activity.path || ""
+          variations: normalizeActivityPaths(activity.activity_path || activity.file_path || activity.path)
         }));
 
         elements.totalCount.textContent = activities.length;
@@ -565,6 +716,23 @@
         elements.sortSelect.value = state.sort;
         populateFilters();
         render();
+      });
+
+      elements.cards.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-open-activity]");
+        if (!button) return;
+
+        const activity = activities.find((item) => item.id === Number(button.dataset.activityId));
+        const variation = activity?.variations[Number(button.dataset.variationIndex)];
+        if (!activity || !variation) return;
+
+        openActivity(activity, variation);
+      });
+
+      elements.viewerClose.addEventListener("click", () => {
+        elements.activityFrame.removeAttribute("src");
+        elements.activityViewer.classList.remove("is-open");
+        elements.viewerExternal.setAttribute("href", "#");
       });
     }
 
@@ -636,19 +804,30 @@
       items.forEach((activity) => {
         const card = document.createElement("article");
         card.className = "activity-card";
+        const variationButtons = activity.variations.map((variation, index) => `
+          <button
+            class="launch"
+            type="button"
+            data-open-activity
+            data-activity-id="${activity.id}"
+            data-variation-index="${index}"
+          >
+            ${escapeHtml(variation.label)} <span aria-hidden="true">→</span>
+          </button>
+        `).join("");
 
         card.innerHTML = `
           <div class="meta">
             <span class="pill">${escapeHtml(activity.className)}</span>
             <span class="pill">${escapeHtml(activity.subject)}</span>
             <span class="pill">${escapeHtml(activity.topic)}</span>
-            ${isAvailable(activity) ? '<span class="pill available">Available</span>' : ""}
+            ${isAvailable(activity) ? `<span class="pill available">${activity.variations.length} ${activity.variations.length === 1 ? "variation" : "variations"}</span>` : ""}
           </div>
           <h2>${escapeHtml(activity.name)}</h2>
           <p>${escapeHtml(activity.details)}</p>
           <div class="card-actions">
             ${isAvailable(activity)
-              ? `<a class="launch" href="${encodeURI(activity.path)}">Open activity <span aria-hidden="true">→</span></a>`
+              ? `<div class="variation-list">${variationButtons}</div>`
               : '<span class="unavailable">No HTML activity yet</span>'}
           </div>
         `;
@@ -730,7 +909,42 @@
     }
 
     function isAvailable(activity) {
-      return Boolean(activity.path);
+      return activity.variations.length > 0;
+    }
+
+    function normalizeActivityPaths(rawPaths) {
+      if (!rawPaths) return [];
+      const paths = Array.isArray(rawPaths) ? rawPaths : [rawPaths];
+      return paths
+        .map((entry, index) => {
+          if (typeof entry === "string") {
+            return {
+              label: index ? `Variation ${index + 1}` : "Default",
+              path: entry
+            };
+          }
+
+          if (entry && typeof entry === "object") {
+            const path = entry.path || entry.href || entry.url || "";
+            return {
+              label: entry.label || entry.name || `Variation ${index + 1}`,
+              path
+            };
+          }
+
+          return null;
+        })
+        .filter((variation) => variation && variation.path);
+    }
+
+    function openActivity(activity, variation) {
+      elements.viewerActivity.textContent = activity.name;
+      elements.viewerVariation.textContent = variation.label;
+      elements.viewerExternal.setAttribute("href", variation.path);
+      elements.activityFrame.setAttribute("title", `${activity.name} - ${variation.label}`);
+      elements.activityFrame.setAttribute("src", variation.path);
+      elements.activityViewer.classList.add("is-open");
+      elements.activityViewer.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
     function sortText(a, b) {

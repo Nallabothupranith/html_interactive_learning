@@ -6,7 +6,12 @@
       "topic": "Food",
       "activity_name": "Food Detectives",
       "activity_details": "Explore carbohydrates, proteins, and fats through an interactive 3D quiz-and-learn activity.",
-      "activity_path": "activities/food-detectives/index.html"
+      "activity_path": [
+        {
+          "label": "3D Quiz",
+          "path": "activities/food-detectives/index.html"
+        }
+      ]
     },
     {
       "class": "VI",
@@ -1561,7 +1566,16 @@
       "topic": "Geometry",
       "activity_name": "Pythagoras Theorem",
       "activity_details": "Arrange square cut-outs to verify that a² + b² = c² in a right-angled triangle.",
-      "activity_path": "activities/pythagoras/index.html"
+      "activity_path": [
+        {
+          "label": "2D Challenge",
+          "path": "activities/pythagoras/index.html"
+        },
+        {
+          "label": "3D Interactive",
+          "path": "activities/pythagoras/3d/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
