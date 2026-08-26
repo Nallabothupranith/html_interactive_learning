@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Germination of Seeds • 3D Interactive</title>
+  <style>
+    :root { --brand: #176b87; --panel: #ffffff; --muted:#6b7682 }
+    html,body{height:100%;margin:0}
+    body{font-family:Inter, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;background:#eef6fb;color:#18212f;}
+    #page{width:min(1180px,calc(100% - 32px));margin:18px auto;min-height:calc(100vh - 36px);position:relative}
+
+    /* UI panels */
+    .info-panel{position:absolute;left:18px;top:18px;background:var(--panel);border:1px solid #e6eef6;border-radius:12px;padding:14px;box-shadow:0 16px 40px rgba(28,39,58,0.08);backdrop-filter: blur(6px);z-index:40;max-width:360px}
+    .info-panel h1{margin:0;font-size:1.2rem}
+    .lede{color:var(--muted);margin-top:8px;font-size:0.95rem}
+    .mode-toggle{display:flex;gap:8px;margin-top:10px}
+    .mode-btn{border:none;padding:8px 14px;border-radius:999px;background:transparent;color:var(--brand);cursor:pointer}
+    .mode-btn.active{background:var(--brand);color:white;box-shadow:0 6px 18px rgba(23,107,135,0.12)}
+
+    .quiz-panel{position:absolute;right:18px;top:18px;width:320px;background:linear-gradient(180deg,#fffdf8,#fff);border:1px solid #f0e8df;border-radius:14px;padding:12px;box-shadow:0 20px 35px rgba(120,60,30,0.08);z-index:40}
+    .quiz-panel h2{margin:0;font-size:1rem;color:#7b3f00}
+    .quiz-controls{display:flex;gap:8px;margin-top:8px}
+    .quiz-btn{background:#ffd89a;border:none;padding:8px 10px;border-radius:999px;cursor:pointer}
+
+    #canvas-wrap{position:relative;margin-top:120px;border-radius:12px;overflow:hidden;height:calc(100vh - 180px);box-shadow:0 14px 40px rgba(28,39,58,0.06)}
+
+    /* CSS2D labels style (mirrors other 3D activities) */
+    .label-root{background:rgba(255,255,255,0.95);padding:6px 10px;border-radius:14px;border:2px solid rgba(0,0,0,0.06);font-weight:700;color:#123}
+
+    /* small responsive tweaks */
+    @media (max-width:900px){
+      .info-panel,.quiz-panel{position:static;width:auto;margin:12px}
+      #canvas-wrap{height:60vh;margin-top:12px}
+    }
+  </style>
+</head>
+<body>
+  <div id="page">
+    <div class="info-panel" id="info-panel">
+      <h1>🪴 Germination of Seeds</h1>
+      <div class="lede">Interactive 3D demo: view seed swelling, radicle emergence, and shoot growth. Use the controls to animate and inspect the model.</div>
+      <div class="mode-toggle" style="margin-top:12px">
+        <button class="mode-btn active" id="mode-learn">📘 Learn</button>
+        <button class="mode-btn" id="mode-inspect">🔎 Inspect</button>
+      </div>
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <input id="timeline" type="range" min="0" max="3" step="0.01" value="0" style="flex:1">
+        <div style="min-width:58px;text-align:center;font-weight:700">Day <span id="day">0.00</span></div>
+      </div>
+    </div>
+
+    <div class="quiz-panel" id="quiz-panel">
+      <h2>Classroom notes</h2>
+      <div style="margin-top:8px;color:#444;font-size:0.95rem">Measure root length, observe color changes, and sketch seed cross-section. This visualization is simplified — use real seeds for hands-on work.</div>
+      <div class="quiz-controls" style="margin-top:10px">
+        <button class="quiz-btn" id="play">▶ Play</button>
+        <button class="quiz-btn" id="pause">⏸ Pause</button>
+        <button class="quiz-btn" id="reset">⟲ Reset</button>
+      </div>
+    </div>
+
+    <div id="canvas-wrap"><div id="canvas-container"></div></div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.128.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.128.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+
+    // DOM refs
+    const container = document.getElementById('canvas-container');
+    const timeline = document.getElementById('timeline');
+    const dayLabel = document.getElementById('day');
+    const playBtn = document.getElementById('play');
+    const pauseBtn = document.getElementById('pause');
+    const resetBtn = document.getElementById('reset');
+    const modeLearn = document.getElementById('mode-learn');
+    const modeInspect = document.getElementById('mode-inspect');
+
+    // Renderer & scene
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xeaf6fb);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / (window.innerHeight - 180), 0.1, 100);
+    camera.position.set(0.6, 0.8, 1.6);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight - 180);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+
+    // CSS2D labels
+    const labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(window.innerWidth, window.innerHeight - 180);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    container.appendChild(labelRenderer.domElement);
+
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.target.set(0,0.18,0);
+
+    // Lights
+    const hemi = new THREE.HemisphereLight(0xffffff, 0x6b7a8a, 0.8);
+    scene.add(hemi);
+
+    const dir = new THREE.DirectionalLight(0xffffff, 0.9);
+    dir.position.set(2, 5, 2);
+    dir.castShadow = true;
+    dir.shadow.camera.left = -1; dir.shadow.camera.right = 1; dir.shadow.camera.top = 1; dir.shadow.camera.bottom = -1;
+    dir.shadow.mapSize.set(1024,1024);
+    scene.add(dir);
+
+    // Ground plane (receives shadow)
+    const groundMat = new THREE.MeshStandardMaterial({ color: 0xf3f6f8, roughness: 0.95 });
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(6,6), groundMat);
+    ground.rotation.x = -Math.PI/2; ground.position.y = 0; ground.receiveShadow = true;
+    scene.add(ground);
+
+    // Seed model (simple, stylized)
+    const seedGroup = new THREE.Group(); seedGroup.position.set(0, 0.06, 0); scene.add(seedGroup);
+
+    const seedMat = new THREE.MeshStandardMaterial({ color: 0x8b5a2b, roughness: 0.5, metalness: 0.02 });
+    const seedGeo = new THREE.SphereGeometry(0.12, 32, 24);
+    const seed = new THREE.Mesh(seedGeo, seedMat); seed.castShadow = true; seed.receiveShadow = true; seedGroup.add(seed);
+
+    // Slight squash to resemble seed shape
+    seed.scale.set(1.0, 0.85, 1.0);
+
+    // Radicle (root) - initially hidden
+    const rootMat = new THREE.MeshStandardMaterial({ color: 0xf2e7d7, roughness: 0.7 });
+    const rootGeo = new THREE.CylinderGeometry(0.016, 0.02, 0.6, 12);
+    const root = new THREE.Mesh(rootGeo, rootMat); root.castShadow = true; root.receiveShadow = false;
+    root.rotation.x = Math.PI/2; root.position.set(0, -0.25, 0); root.scale.set(0.001,0.001,0.001);
+    seedGroup.add(root);
+
+    // Shoot - initially hidden
+    const shootMat = new THREE.MeshStandardMaterial({ color: 0x3a9b3a, roughness: 0.6 });
+    const shootGeo = new THREE.CylinderGeometry(0.02,0.02,0.9,12);
+    const shoot = new THREE.Mesh(shootGeo, shootMat); shoot.castShadow = true; shoot.receiveShadow = false;
+    shoot.position.set(0, 0.32, 0); shoot.scale.set(0.001,0.001,0.001); seedGroup.add(shoot);
+
+    // CSS2D labels
+    function makeLabel(text){
+      const div = document.createElement('div'); div.className = 'label-root'; div.innerText = text; return new CSS2DObject(div);
+    }
+    const seedLabel = makeLabel('Seed'); seedLabel.position.set(0, 0.18, 0); seedGroup.add(seedLabel);
+    const rootLabel = makeLabel('Radicle'); rootLabel.position.set(0, -0.45, 0); rootLabel.element.style.opacity = '0.0'; seedGroup.add(rootLabel);
+    const shootLabel = makeLabel('Shoot'); shootLabel.position.set(0, 0.9, 0); shootLabel.element.style.opacity = '0.0'; seedGroup.add(shootLabel);
+
+    // state
+    let t = 0; let target = 0; let playing = false;
+
+    function setFromT(x){
+      // seed swelling
+      const s = 1 + Math.min(x/1.2, 0.6);
+      seed.scale.set(s, s*0.85, s);
+
+      // radicle appears between 0.8 -> 1.8
+      const rProg = clamp((x - 0.8)/1.0, 0, 1);
+      root.scale.set(1, rProg, 1);
+      root.position.set(0, -0.25 - (rProg*0.22), 0);
+      rootLabel.element.style.opacity = `${Math.min(1, rProg*1.2)}`;
+
+      // shoot appears 1.6 -> 3.0
+      const sProg = clamp((x - 1.6)/1.4, 0, 1);
+      shoot.scale.set(1, sProg, 1);
+      shoot.position.set(0, 0.22 + (sProg*0.6), 0);
+      shootLabel.element.style.opacity = `${Math.min(1, sProg*1.2)}`;
+
+      dayLabel.textContent = x.toFixed(2);
+    }
+
+    function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+
+    // UI events
+    timeline.addEventListener('input', (e)=>{ target = parseFloat(e.target.value); setFromT(target); });
+    playBtn.addEventListener('click', ()=>{ playing = true; });
+    pauseBtn.addEventListener('click', ()=>{ playing = false; });
+    resetBtn.addEventListener('click', ()=>{ playing = false; target = 0; timeline.value = 0; setFromT(0); });
+
+    modeLearn.addEventListener('click', ()=>{ modeLearn.classList.add('active'); modeInspect.classList.remove('active'); controls.enabled = true; });
+    modeInspect.addEventListener('click', ()=>{ modeInspect.classList.add('active'); modeLearn.classList.remove('active'); controls.enabled = true; });
+
+    // responsiveness
+    window.addEventListener('resize', ()=>{ const w = window.innerWidth; const h = window.innerHeight - 180; renderer.setSize(w,h); labelRenderer.setSize(w,h); camera.aspect = w/h; camera.updateProjectionMatrix(); });
+
+    // animation loop
+    const clock = new THREE.Clock();
+    function animate(){
+      const dt = clock.getDelta();
+      if(playing){ target += dt*0.45; if(target >= 3){ target = 3; playing = false; } timeline.value = target; }
+      // smooth chase
+      t += (target - t) * Math.min(1, dt*8);
+      setFromT(t);
+      controls.update();
+      renderer.render(scene, camera);
+      labelRenderer.render(scene, camera);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+  </script>
+</body>
+</html>

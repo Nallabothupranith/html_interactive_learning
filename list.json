@@ -18,8 +18,19 @@
       "subject": "Science",
       "topic": "Food",
       "activity_name": "Germination of Seeds",
-      "activity_details": "Soak dry whole seeds of gram or moong in water for a day. Drain excess water and cover seeds with wet cotton cloth. Keep moist for 2-3 days. Observe daily for the emergence of a white structure (root) and later a shoot."
+      "activity_details": "Soak dry whole seeds of gram or moong in water for a day. Drain excess water and cover seeds with wet cotton cloth. Keep moist for 2-3 days. Observe daily for the emergence of a white structure (root) and later a shoot.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/germination-of-seeds/index.html"
+        },
+        {
+          "label": "3D Interactive",
+          "path": "activities/germination-of-seeds/3d/index.html"
+        }
+      ]
     },
+
     {
       "class": "VI",
       "subject": "Science",
