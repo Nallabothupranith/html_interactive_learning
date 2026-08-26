@@ -89,30 +89,36 @@ and launch your activity.
 
 Contributions are welcome through pull requests.
 
+Before starting, please create a GitHub issue for the activity you want to build,
+or comment on an existing issue to claim it. Mention the class, subject, topic,
+and activity name from `list.json`. This helps contributors avoid working on the
+same activity at the same time.
+
 1. Fork this repository to your own GitHub account.
 2. Clone your fork locally.
-3. Create a new branch for your activity:
+3. Create or claim a GitHub issue for the activity.
+4. Create a new branch for your activity:
 
 ```sh
 git checkout -b add-my-activity
 ```
 
-4. Add the activity files and update `list.json`.
-5. Test the homepage and the activity locally.
-6. Commit your changes with a clear message:
+5. Add the activity files and update `list.json`.
+6. Test the homepage and the activity locally.
+7. Commit your changes with a clear message:
 
 ```sh
 git add README.md list.json activities/my-activity/
 git commit -m "Add interactive activity for my topic"
 ```
 
-7. Push your branch to your fork:
+8. Push your branch to your fork:
 
 ```sh
 git push origin add-my-activity
 ```
 
-8. Open a pull request against the main repository.
+9. Open a pull request against the main repository.
 
 In your pull request, briefly mention the class, subject, topic, activity name,
 what students do in the activity, and any variations you added.
