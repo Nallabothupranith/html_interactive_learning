@@ -341,15 +341,54 @@
         }
         
         .food-label {
-            animation: bounce 2s ease-in-out infinite;
             cursor: pointer;
-            transition: transform 0.2s, animation-play-state 0.2s;
+            pointer-events: auto;
             user-select: none;
+            white-space: nowrap;
+        }
+
+        .food-label-motion {
+            display: inline-flex;
+            align-items: center;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .food-label-content {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            min-width: 92px;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 800;
+            color: #2d3e50;
+            text-shadow: none;
+            background: rgba(255, 255, 248, 0.92);
+            padding: 6px 10px;
+            border-radius: 14px;
+            border: 2px solid rgba(255, 184, 130, 0.95);
+            box-shadow: 0 5px 14px rgba(80, 45, 20, 0.18);
+            backdrop-filter: blur(5px);
+            transition: transform 0.2s;
         }
         
-        .food-label:hover {
-            transform: scale(1.3);
+        .food-label .food-emoji {
+            font-size: 28px;
+            line-height: 1;
+            filter: drop-shadow(0 1px 1px rgba(0,0,0,0.15));
+        }
+        
+        .food-label .food-name {
+            font-size: 15px;
+            line-height: 1;
+        }
+        
+        .food-label:hover .food-label-motion {
             animation-play-state: paused;
+        }
+
+        .food-label:hover .food-label-content {
+            transform: scale(1.18);
         }
         
         /* Hover bubble – translucent white rounded rectangle, emoji only (no name) */
@@ -378,6 +417,35 @@
         .food-tooltip.show {
             opacity: 1;
             transform: translate(-50%, 0);
+        }
+
+        @media (max-width: 720px) {
+            .food-label-content {
+                min-width: 78px;
+                gap: 5px;
+                padding: 5px 8px;
+            }
+
+            .food-label .food-emoji {
+                font-size: 24px;
+            }
+
+            .food-label .food-name {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 460px) {
+            .food-label-content {
+                min-width: 62px;
+                gap: 4px;
+                padding: 4px 6px;
+            }
+
+            .food-label .food-name {
+                display: inline;
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -445,15 +513,15 @@
 
         // ========== CENTRALIZED FOOD DATA ==========
         const foods = [
-            { name: '🥔 potato', pos: [-2.0, 0.2, 0.5], starch: true, protein: false, fat: false, color: 0xc99a6b, emoji: '🥔', fact: 'Potatoes store energy as starch — like a battery for the plant!', rhyme: 'Potato brown, starch in town.' },
-            { name: '🌾 rice', pos: [0.5, 0.1, -0.8], starch: true, protein: false, fat: false, color: 0xf5f0d7, emoji: '🌾', fact: 'Rice grains are full of starch, which gives you running power.', rhyme: 'Rice is nice, starch gives spice.' },
-            { name: '🥖 bread', pos: [2.2, 0.3, 1.2], starch: true, protein: false, fat: false, color: 0xe0b059, emoji: '🥖', fact: 'Bread bubbles from yeast, but the starch is what turns iodine blue!', rhyme: 'Bread in the toaster, starch is the booster.' },
-            { name: '🥚 egg white', pos: [-1.2, 0.5, 2.5], starch: false, protein: true, fat: true, color: 0xf3f0e0, emoji: '🥚', fact: 'Egg whites are almost pure protein — they help chicks grow muscles!', rhyme: 'Egg white and yolk, protein for folk.' },
-            { name: '🫘 dal', pos: [1.8, 0.2, -1.8], starch: false, protein: true, fat: false, color: 0xb37b5e, emoji: '🫘', fact: 'Lentils (dal) are plant-based protein — body building blocks!', rhyme: 'Dal is protein, strong and lean.' },
-            { name: '🧈 butter', pos: [-2.5, 0.3, -1.8], starch: false, protein: false, fat: true, color: 0xffe57a, emoji: '🧈', fact: 'Butter is mostly fat — it leaves a permanent grease spot on paper.', rhyme: 'Butter melt, fat is felt.' },
-            { name: '🥜 peanut', pos: [3.0, 0.2, 0.0], starch: false, protein: true, fat: true, color: 0xc49a6c, emoji: '🥜', fact: 'Peanuts have protein for muscles AND fat for energy!', rhyme: 'Peanut double-pack: protein and fat snack.' },
-            { name: '🍎 apple', pos: [0.0, 0.3, 2.8], starch: false, protein: false, fat: false, color: 0xeF4f4f, emoji: '🍎', fact: 'Apples have natural sugar and fibre — but no starch, protein or fat.', rhyme: 'Apple fresh, no starchy mess.' },
-            { name: '🥛 milk', pos: [-3.5, 0.4, -2.5], starch: false, protein: true, fat: true, color: 0xffffff, emoji: '🥛', fact: 'Milk has protein for growth and fat for energy — perfect for babies!', rhyme: 'Milk is white, protein and fat are right.' }
+            { name: '🥔 potato', label: 'Potato', pos: [-2.0, 0.2, 0.5], starch: true, protein: false, fat: false, color: 0xc99a6b, emoji: '🥔', fact: 'Potatoes store energy as starch — like a battery for the plant!', rhyme: 'Potato brown, starch in town.' },
+            { name: '🌾 rice', label: 'Rice', pos: [0.5, 0.1, -0.8], starch: true, protein: false, fat: false, color: 0xf5f0d7, emoji: '🌾', fact: 'Rice grains are full of starch, which gives you running power.', rhyme: 'Rice is nice, starch gives spice.' },
+            { name: '🥖 bread', label: 'Bread', pos: [2.2, 0.3, 1.2], starch: true, protein: false, fat: false, color: 0xe0b059, emoji: '🥖', fact: 'Bread bubbles from yeast, but the starch is what turns iodine blue!', rhyme: 'Bread in the toaster, starch is the booster.' },
+            { name: '🥚 egg white', label: 'Egg', pos: [-1.2, 0.5, 2.5], starch: false, protein: true, fat: true, color: 0xf3f0e0, emoji: '🥚', fact: 'Egg whites are almost pure protein — they help chicks grow muscles!', rhyme: 'Egg white and yolk, protein for folk.' },
+            { name: '🫘 dal', label: 'Dal', pos: [1.8, 0.2, -1.8], starch: false, protein: true, fat: false, color: 0xb37b5e, emoji: '🫘', fact: 'Lentils (dal) are plant-based protein — body building blocks!', rhyme: 'Dal is protein, strong and lean.' },
+            { name: '🧈 butter', label: 'Butter', pos: [-2.5, 0.3, -1.8], starch: false, protein: false, fat: true, color: 0xffe57a, emoji: '🧈', fact: 'Butter is mostly fat — it leaves a permanent grease spot on paper.', rhyme: 'Butter melt, fat is felt.' },
+            { name: '🥜 peanut', label: 'Peanut', pos: [3.0, 0.2, 0.0], starch: false, protein: true, fat: true, color: 0xc49a6c, emoji: '🥜', fact: 'Peanuts have protein for muscles AND fat for energy!', rhyme: 'Peanut double-pack: protein and fat snack.' },
+            { name: '🍎 apple', label: 'Apple', pos: [0.0, 0.3, 2.8], starch: false, protein: false, fat: false, color: 0xeF4f4f, emoji: '🍎', fact: 'Apples have natural sugar and fibre — but no starch, protein or fat.', rhyme: 'Apple fresh, no starchy mess.' },
+            { name: '🥛 milk', label: 'Milk', pos: [-3.5, 0.4, -2.5], starch: false, protein: true, fat: true, color: 0xffffff, emoji: '🥛', fact: 'Milk has protein for growth and fat for energy — perfect for babies!', rhyme: 'Milk is white, protein and fat are right.' }
         ];
 
         // ========== STATE MANAGEMENT ==========
@@ -483,6 +551,7 @@
         labelRenderer.domElement.style.left = '0px';
         labelRenderer.domElement.style.pointerEvents = 'none'; // Don't block clicks by default
         labelRenderer.domElement.style.backgroundColor = 'transparent';
+        labelRenderer.domElement.style.zIndex = '8';
         document.body.appendChild(labelRenderer.domElement);
         
         const controls = new OrbitControls(camera, renderer.domElement);
@@ -534,6 +603,66 @@
         // ========== CREATE FOOD OBJECTS ==========
         const foodMeshes = [];
         const foodLabels = [];
+
+        function addFoodDetails(mesh, food) {
+            const darker = new THREE.MeshStandardMaterial({ color: 0x7a5638, roughness: 0.8 });
+            const pale = new THREE.MeshStandardMaterial({ color: 0xfff8df, roughness: 0.75 });
+
+            if (food.label === 'Potato') {
+                mesh.scale.set(1.18, 0.82, 0.9);
+                [[0.18, 0.28, 0.4], [-0.22, 0.1, 0.42], [0.05, -0.18, 0.43]].forEach(([x, y, z]) => {
+                    const eye = new THREE.Mesh(new THREE.SphereGeometry(0.045, 12, 12), darker);
+                    eye.position.set(x, y, z);
+                    mesh.add(eye);
+                });
+            } else if (food.label === 'Rice') {
+                mesh.scale.set(1.15, 0.35, 0.85);
+                for (let i = 0; i < 7; i += 1) {
+                    const grain = new THREE.Mesh(new THREE.SphereGeometry(0.08, 12, 12), pale);
+                    grain.scale.set(1.8, 0.55, 0.75);
+                    grain.position.set((i - 3) * 0.12, 0.24 + Math.sin(i) * 0.03, 0.34 + Math.cos(i) * 0.03);
+                    grain.rotation.z = i * 0.45;
+                    mesh.add(grain);
+                }
+            } else if (food.label === 'Bread') {
+                mesh.scale.set(1.45, 0.58, 0.75);
+                const sliceMat = new THREE.MeshStandardMaterial({ color: 0xffd48a, roughness: 0.65 });
+                [-0.24, 0, 0.24].forEach((x) => {
+                    const stripe = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.5, 0.9), sliceMat);
+                    stripe.position.set(x, 0.02, 0.2);
+                    stripe.rotation.z = 0.18;
+                    mesh.add(stripe);
+                });
+            } else if (food.label === 'Egg') {
+                mesh.scale.set(1.28, 0.38, 0.92);
+                const yolkMat = new THREE.MeshStandardMaterial({ color: 0xffc83d, roughness: 0.55, emissive: 0x331a00, emissiveIntensity: 0.04 });
+                const yolk = new THREE.Mesh(new THREE.SphereGeometry(0.18, 24, 24), yolkMat);
+                yolk.scale.set(1, 0.32, 1);
+                yolk.position.set(0.06, 0.34, 0.2);
+                mesh.add(yolk);
+            } else if (food.label === 'Dal') {
+                mesh.scale.set(1.1, 0.32, 0.9);
+                const lentilMat = new THREE.MeshStandardMaterial({ color: 0xc88450, roughness: 0.8 });
+                for (let i = 0; i < 8; i += 1) {
+                    const lentil = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 12), lentilMat);
+                    lentil.scale.set(1.1, 0.35, 0.95);
+                    lentil.position.set(Math.cos(i) * 0.25, 0.25 + (i % 2) * 0.03, Math.sin(i) * 0.18 + 0.2);
+                    mesh.add(lentil);
+                }
+            } else if (food.label === 'Butter') {
+                mesh.scale.set(1.2, 0.55, 0.85);
+                const patMat = new THREE.MeshStandardMaterial({ color: 0xfff0a8, roughness: 0.45 });
+                const pat = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.22, 0.44), patMat);
+                pat.position.set(0, 0.26, 0.12);
+                mesh.add(pat);
+            } else if (food.label === 'Peanut') {
+                mesh.scale.set(1.55, 0.55, 0.62);
+                const grooveMat = new THREE.MeshStandardMaterial({ color: 0x8c633d, roughness: 0.8 });
+                const groove = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.42, 0.72), grooveMat);
+                groove.position.set(0, 0.1, 0.2);
+                mesh.add(groove);
+            }
+        }
         
         foods.forEach((food, index) => {
             let mesh;
@@ -577,26 +706,19 @@
                     stem.position.set(0, 0.5, 0.1);
                     mesh.add(stem);
                 }
+
+                addFoodDetails(mesh, food);
             }
             
             foodMeshes.push(mesh);
             
             // Create bouncing label (only clickable target)
             const div = document.createElement('div');
-            div.textContent = food.emoji;
             div.className = 'food-label';
-            div.style.fontSize = '32px';
-            div.style.fontWeight = 'bold';
-            div.style.textShadow = '2px 2px 4px #00000080';
-            div.style.background = 'rgba(255,255,240,0.7)';
-            div.style.padding = '4px 8px';
-            div.style.borderRadius = '8px';
-            div.style.border = '2px solid rgba(255,255,255,0.8)';
-            div.style.backdropFilter = 'blur(4px)';
-            div.style.pointerEvents = 'auto';
             div.style.animationDelay = `${index * 0.15}s`;
             div.setAttribute('data-food-index', index);
-            div.setAttribute('title', food.name); // Add tooltip
+            div.setAttribute('title', food.name);
+            div.innerHTML = `<span class="food-label-motion" style="animation-delay:${index * 0.15}s"><span class="food-label-content"><span class="food-emoji">${food.emoji}</span><span class="food-name">${food.label}</span></span></span>`;
             
             // Add hover event listeners for tooltip
             const tooltip = document.createElement('div');
@@ -1044,8 +1166,8 @@
         // Food label clicks - handle clicks on label elements directly
         // Use event delegation on document to catch all label clicks
         document.addEventListener('click', (e) => {
-            const target = e.target;
-            if (target && target.classList && target.classList.contains('food-label')) {
+            const target = e.target.closest && e.target.closest('.food-label');
+            if (target) {
                 e.stopPropagation();
                 const foodIndex = parseInt(target.getAttribute('data-food-index'));
                 if (!isNaN(foodIndex) && foods[foodIndex] && foodMeshes[foodIndex]) {
