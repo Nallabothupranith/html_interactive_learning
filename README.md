@@ -85,6 +85,38 @@ python3 -m http.server 8000
 Then open `http://127.0.0.1:8000/` and confirm the homepage can filter, find,
 and launch your activity.
 
+## Fork and Pull Request
+
+Contributions are welcome through pull requests.
+
+1. Fork this repository to your own GitHub account.
+2. Clone your fork locally.
+3. Create a new branch for your activity:
+
+```sh
+git checkout -b add-my-activity
+```
+
+4. Add the activity files and update `list.json`.
+5. Test the homepage and the activity locally.
+6. Commit your changes with a clear message:
+
+```sh
+git add README.md list.json activities/my-activity/
+git commit -m "Add interactive activity for my topic"
+```
+
+7. Push your branch to your fork:
+
+```sh
+git push origin add-my-activity
+```
+
+8. Open a pull request against the main repository.
+
+In your pull request, briefly mention the class, subject, topic, activity name,
+what students do in the activity, and any variations you added.
+
 ## Design Notes
 
 Design for real classrooms. A teacher may be projecting the activity to a class,
