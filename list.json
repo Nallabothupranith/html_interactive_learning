@@ -1486,6 +1486,10 @@
         {
           "label": "Balance Lab",
           "path": "activities/linear-equations-balance/index.html"
+        },
+        {
+          "label": "Group Challenge",
+          "path": "activities/linear-equations-balance/group-challenge/index.html"
         }
       ]
     },

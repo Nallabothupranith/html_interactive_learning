@@ -4,6 +4,11 @@ Interactive, browser-based classroom activities for school learning. The root
 homepage reads `list.json`, shows the catalog, and opens available activity
 variations inside a responsive iframe.
 
+## Ideas
+Refer below links for Ideas
+- https://ncert.nic.in/science-laboratory-manual.php?ln=en
+- https://ncert.nic.in/school-kits-and-lab-manual.php?ln=en
+
 ## Contributing Activities
 
 Most activities in `list.json` are still missing an HTML implementation. Pick
