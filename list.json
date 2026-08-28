@@ -725,6 +725,71 @@
       "activity_details": "Place a mirror in a water-filled tumbler, reflect sunlight to a wall, and observe the spectrum."
     },
     {
+      "class": "VII",
+      "subject": "Mathematics",
+      "topic": "Integers",
+      "activity_name": "Integer Number Line Game",
+      "activity_details": "Move a character left or right on a number line to solve integer addition and subtraction problems.",
+      "activity_path": [
+        {
+          "label": "Number Line Game",
+          "path": "activities/integers-number-line/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VII",
+      "subject": "Mathematics",
+      "topic": "Fractions and Decimals",
+      "activity_name": "Fraction Visualizer",
+      "activity_details": "Click equal pizza slices to represent fractions and connect shaded parts with decimal values.",
+      "activity_path": [
+        {
+          "label": "Fraction Visualizer",
+          "path": "activities/fraction-visualizer/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VII",
+      "subject": "Mathematics",
+      "topic": "Simple Equations",
+      "activity_name": "Balance the Equation",
+      "activity_details": "Drag or select a number for x and use a balance model to solve equations such as x + 5 = 12.",
+      "activity_path": [
+        {
+          "label": "Balance Lab",
+          "path": "activities/simple-equations-balance/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VII",
+      "subject": "Mathematics",
+      "topic": "Lines and Angles",
+      "activity_name": "Angle Explorer",
+      "activity_details": "Move a ray to create angles and identify acute, right, obtuse, straight, and reflex angles.",
+      "activity_path": [
+        {
+          "label": "Angle Explorer",
+          "path": "activities/angle-explorer/index.html"
+        }
+      ]
+    },
+    {
+      "class": "VII",
+      "subject": "Mathematics",
+      "topic": "Perimeter and Area",
+      "activity_name": "Area Builder",
+      "activity_details": "Change the length and breadth of a rectangle, count grid squares, and calculate area and perimeter.",
+      "activity_path": [
+        {
+          "label": "Area Builder",
+          "path": "activities/area-builder/index.html"
+        }
+      ]
+    },
+    {
       "class": "VIII",
       "subject": "Science",
       "topic": "Crop Production and Management",
