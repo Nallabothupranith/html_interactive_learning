@@ -193,8 +193,14 @@
       "class": "VI",
       "subject": "Science",
       "topic": "Materials",
-      "activity_name": "Electric Conductivity of Metals and Non-metals",
-      "activity_details": "Make a simple electric circuit with a bulb. Test iron nail, zinc granules, sulphur lump, and coal piece. The bulb glows for iron and zinc (metals) but not for sulphur and coal (non-metals)."
+      "activity_name": "Electric Conductivity of Metals and Non-Metals",
+      "activity_details": "Make a simple electric circuit with a bulb. Test iron nail, zinc granules, sulphur lump, and coal piece. The bulb glows for iron and zinc (metals) but not for sulphur and coal (non-metals).",
+      "activity_path": [
+        {
+          "label": "Electric Conductivity of Metals and Non-Metals",
+          "path": "activities/Electric-Conductivity/index.html"
+        }
+      ]
     },
     {
       "class": "VI",
