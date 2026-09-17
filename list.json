@@ -1919,7 +1919,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Angle in a Semi-circle",
-      "activity_details": "Mark a diameter on a circular board. Measure the angle at any point on the semi-circle and verify it is 90°."
+      "activity_details": "Mark a diameter on a circular board. Measure the angle at any point on the semi-circle and verify it is 90°.",
+      "activity_path": [
+        {
+          "label": "Angle in a Semi-circle",
+          "path": "activities/angle-in-semi-circle/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
