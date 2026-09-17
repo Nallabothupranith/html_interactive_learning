@@ -138,14 +138,26 @@
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Identification of Acidic/Basic/Neutral Salts",
-      "activity_details": "Test ferric chloride, sodium acetate, and sodium chloride solutions with red and blue litmus papers. Ferric chloride turns blue litmus red (acidic). Sodium acetate turns red litmus blue (basic). Sodium chloride shows no change (neutral)."
+      "activity_details": "Test ferric chloride, sodium acetate, and sodium chloride solutions with red and blue litmus papers. Ferric chloride turns blue litmus red (acidic). Sodium acetate turns red litmus blue (basic). Sodium chloride shows no change (neutral).",
+      "activity_path": [
+    {
+      "label": "Identification of Acidic/Basic/Neutral Salts",
+      "path": "activities/identification-of-acidic-basic-neutral-salts/index.html"
+    }
+  ]
     },
     {
       "class": "VI",
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Differentiating Physical and Chemical Changes",
-      "activity_details": "Fold paper (physical, reversible). Tear paper (physical, irreversible). Burn paper (chemical change, new substances formed)."
+      "activity_details": "Fold paper (physical, reversible). Tear paper (physical, irreversible). Burn paper (chemical change, new substances formed).",
+      "activity_path": [
+  {
+    "label": "Differentiating Physical and Chemical Changes",
+    "path": "activities/differentiating-physical-and-chemical-changes/index.html"
+  }
+]
     },
     {
       "class": "VI",
