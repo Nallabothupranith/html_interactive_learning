@@ -1906,6 +1906,19 @@
           "path": "activities/algebraic-identities/index.html"
         }
       ]
+    },
+    {
+      "class": "IX-X",
+      "subject": "Mathematics",
+      "topic": "Algebra",
+      "activity_name": "Factorisation of Quadratic Polynomials using Algebra Tiles",
+      "activity_details": "Explore factorisation of quadratic polynomials using interactive algebra tiles, factor-pair reasoning, visual grouping, prediction challenges, and multiplication-based verification.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/quadratic-factorisation/index.html"
+        }
+      ]
     }
   ]
 }
