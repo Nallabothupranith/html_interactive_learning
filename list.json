@@ -1887,12 +1887,25 @@
       "activity_name": "Verification of Trigonometric Identities",
       "activity_details": "Use the circular board setup to verify identities like sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ."
     },
-    {
+        {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Mensuration",
       "activity_name": "Surface Area and Volume of Solids",
       "activity_details": "Use a cube with cut-outs of a cuboid, cylinder, cone, and hemisphere. Compare the change in volume and surface area after removing the cut-outs."
+    },
+    {
+      "class": "IX-X",
+      "subject": "Mathematics",
+      "topic": "Algebraic Identities",
+      "activity_name": "Verification of (a+b)² and (a-b)² using Algebra Tiles",
+      "activity_details": "Explore and verify the identities (a+b)² = a² + 2ab + b² and (a-b)² = a² - 2ab + b² using an interactive area model, adjustable values, prediction challenges, and immediate feedback.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/algebraic-identities/index.html"
+        }
+      ]
     }
   ]
 }
