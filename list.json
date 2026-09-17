@@ -1509,13 +1509,19 @@
         }
       ]
     },
-    {
+   {
       "class": "X",
       "subject": "Science",
       "topic": "Electricity",
       "activity_name": "Factors Affecting Resistance",
-      "activity_details": "Test nichrome wires of different length, thickness, and constantan wire. Compare currents."
-    },
+      "activity_details": "Test nichrome wires of different length, thickness, and constantan wire. Compare currents.",
+      "activity_path": [
+        {
+          "label": "Factors Affecting Resistance",
+          "path": "activities/Factors-Affecting-Resistance/index.html"
+        }
+      ]
+},
     {
       "class": "X",
       "subject": "Science",
