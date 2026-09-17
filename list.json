@@ -138,21 +138,39 @@
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Identification of Acidic/Basic/Neutral Salts",
-      "activity_details": "Test ferric chloride, sodium acetate, and sodium chloride solutions with red and blue litmus papers. Ferric chloride turns blue litmus red (acidic). Sodium acetate turns red litmus blue (basic). Sodium chloride shows no change (neutral)."
+      "activity_details": "Test ferric chloride, sodium acetate, and sodium chloride solutions with red and blue litmus papers. Ferric chloride turns blue litmus red (acidic). Sodium acetate turns red litmus blue (basic). Sodium chloride shows no change (neutral).",
+      "activity_path": [
+    {
+      "label": "Identification of Acidic/Basic/Neutral Salts",
+      "path": "activities/identification-of-acidic-basic-neutral-salts/index.html"
+    }
+  ]
     },
     {
       "class": "VI",
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Differentiating Physical and Chemical Changes",
-      "activity_details": "Fold paper (physical, reversible). Tear paper (physical, irreversible). Burn paper (chemical change, new substances formed)."
+      "activity_details": "Fold paper (physical, reversible). Tear paper (physical, irreversible). Burn paper (chemical change, new substances formed).",
+      "activity_path": [
+  {
+    "label": "Differentiating Physical and Chemical Changes",
+    "path": "activities/differentiating-physical-and-chemical-changes/index.html"
+  }
+]
     },
     {
       "class": "VI",
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Compare Water Absorption Capacity of Fibres",
-      "activity_details": "Weigh dry cotton, wool, and nylon fabric pieces. Immerse in water, drip dry, and weigh wet fabric. Calculate the water absorbed per gram of fabric."
+      "activity_details": "Weigh dry cotton, wool, and nylon fabric pieces. Immerse in water, drip dry, and weigh wet fabric. Calculate the water absorbed per gram of fabric.",
+      "activity_path": [
+  {
+    "label": "Compare Water Absorption Capacity of Fibres",
+    "path": "activities/compare-water-absorption-capacity-of-fibres/index.html"
+  }
+]
     },
     {
       "class": "VI",
@@ -193,8 +211,14 @@
       "class": "VI",
       "subject": "Science",
       "topic": "Materials",
-      "activity_name": "Electric Conductivity of Metals and Non-metals",
-      "activity_details": "Make a simple electric circuit with a bulb. Test iron nail, zinc granules, sulphur lump, and coal piece. The bulb glows for iron and zinc (metals) but not for sulphur and coal (non-metals)."
+      "activity_name": "Electric Conductivity of Metals and Non-Metals",
+      "activity_details": "Make a simple electric circuit with a bulb. Test iron nail, zinc granules, sulphur lump, and coal piece. The bulb glows for iron and zinc (metals) but not for sulphur and coal (non-metals).",
+      "activity_path": [
+        {
+          "label": "Electric Conductivity of Metals and Non-Metals",
+          "path": "activities/Electric-Conductivity/index.html"
+        }
+      ]
     },
     {
       "class": "VI",
@@ -736,7 +760,13 @@
       "subject": "Science",
       "topic": "Electric Current and its Effects",
       "activity_name": "Magnetic Effect",
-      "activity_details": "Place a compass needle near a wire connected to a cell/switch. Close the switch and observe the needle deflection."
+      "activity_details": "Place a compass needle near a wire connected to a cell/switch. Close the switch and observe the needle deflection.",
+      "activity_path": [
+        {
+          "label": "Magnetic Effect",
+          "path": "activities/Magnetic Effect/index.html"
+        }
+      ]
     },
     {
       "class": "VII",
@@ -796,7 +826,13 @@
       "subject": "Science",
       "topic": "Light",
       "activity_name": "Water Prism",
-      "activity_details": "Place a mirror in a water-filled tumbler, reflect sunlight to a wall, and observe the spectrum."
+      "activity_details": "Place a mirror in a water-filled tumbler, reflect sunlight to a wall, and observe the spectrum.",
+      "activity_path": [
+        {
+          "label": "Water Prism",
+          "path": "activities/Water Prism/index.html"
+        }
+      ]
     },
     {
       "class": "VII",
@@ -1509,19 +1545,31 @@
         }
       ]
     },
-    {
+   {
       "class": "X",
       "subject": "Science",
       "topic": "Electricity",
       "activity_name": "Factors Affecting Resistance",
-      "activity_details": "Test nichrome wires of different length, thickness, and constantan wire. Compare currents."
-    },
+      "activity_details": "Test nichrome wires of different length, thickness, and constantan wire. Compare currents.",
+      "activity_path": [
+        {
+          "label": "Factors Affecting Resistance",
+          "path": "activities/Factors-Affecting-Resistance/index.html"
+        }
+      ]
+},
     {
       "class": "X",
       "subject": "Science",
       "topic": "Electricity",
       "activity_name": "Current and PD in Series and Parallel",
-      "activity_details": "Measure current and potential difference across resistors in series and parallel combinations."
+      "activity_details": "Measure current and potential difference across resistors in series and parallel combinations.",
+       "activity_path": [
+        {
+          "label": "Current and PD in Series and Parallel",
+          "path": "activities/Current-And-PD/index.html"
+        }
+      ]
     },
     {
       "class": "X",
@@ -1631,7 +1679,8 @@
       "subject": "Mathematics",
       "topic": "Magic Squares",
       "activity_name": "3x3 Magic Square (Magic Constant 15)",
-      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square."
+      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square.",
+      "activity_path": "activities/magic-square/"
     },
     {
       "class": "VI",
@@ -1721,21 +1770,29 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Parallel Lines and a Transversal",
-      "activity_details": "Fix three strips (two parallel, one transversal). Measure corresponding, alternate, and interior angles."
+      "activity_details": "Fix three strips (two parallel, one transversal). Measure corresponding, alternate, and interior angles.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/parallel-lines-transversal/index.html"
+        }
+        ]
     },
     {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of a Triangle",
-      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties."
+      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties.",
+      "activity_path": "activities/properties-of-triangle/"
     },
     {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Mid-point Theorem",
-      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length."
+      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length.",
+      "activity_path": "activities/mid-point-theorem/"
     },
     {
       "class": "IX-X",
@@ -1770,7 +1827,13 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Median and Area of a Triangle",
-      "activity_details": "Draw a median in a triangle on a geoboard. Verify that it divides the triangle into two equal areas."
+      "activity_details": "Draw a median in a triangle on a geoboard. Verify that it divides the triangle into two equal areas.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/median-area-triangle/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
@@ -1815,7 +1878,13 @@
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Verification of (a+b)² and (a-b)²",
-      "activity_details": "Arrange square and rectangular cut-outs to verify (a+b)² = a²+2ab+b² and (a-b)² = a²-2ab+b²."
+      "activity_details": "Arrange square and rectangular cut-outs to verify (a+b)² = a²+2ab+b² and (a-b)² = a²-2ab+b².",
+        "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/algebraic-identities/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
@@ -1829,7 +1898,13 @@
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Factorisation of Quadratic Polynomial",
-      "activity_details": "Use algebraic tiles (x², x, 1) to factorise expressions like x²+5x+6, x²-x-6, 2x²-7x+6."
+      "activity_details": "Use algebraic tiles (x², x, 1) to factorise expressions like x²+5x+6, x²-x-6, 2x²-7x+6.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/quadratic-factorisation/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
@@ -1843,7 +1918,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Perpendicular from Centre to Chord",
-      "activity_details": "Draw a perpendicular from the centre of a circle to a chord. Verify that it bisects the chord."
+      "activity_details": "Draw a perpendicular from the centre of a circle to a chord. Verify that it bisects the chord.",
+      "activity_path": [
+        {
+          "label": "Perpendicular from Centre to Chord",
+          "path": "activities/perpendicular-from-centre-to-chord/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
@@ -1895,30 +1976,17 @@
       "activity_details": "Use a cube with cut-outs of a cuboid, cylinder, cone, and hemisphere. Compare the change in volume and surface area after removing the cut-outs."
     },
     {
-      "class": "IX-X",
-      "subject": "Mathematics",
-      "topic": "Algebraic Identities",
-      "activity_name": "Verification of (a+b)² and (a-b)² using Algebra Tiles",
-      "activity_details": "Explore and verify the identities (a+b)² = a² + 2ab + b² and (a-b)² = a² - 2ab + b² using an interactive area model, adjustable values, prediction challenges, and immediate feedback.",
+      "class": "III",
+      "subject": "Science",
+     "topic": "Colours",
+      "activity_name": "Color Mixing Lab",
+      "activity_details": "Mix pairs of primary colors (red, yellow, blue) and predict the resulting secondary color before revealing it. Tracks correct guesses to encourage repeat attempts.",
       "activity_path": [
         {
           "label": "Interactive",
-          "path": "activities/algebraic-identities/index.html"
+          "path": "activities/colour-mixing-lab/index.html"
         }
       ]
-    },
-    {
-      "class": "IX-X",
-      "subject": "Mathematics",
-      "topic": "Algebra",
-      "activity_name": "Factorisation of Quadratic Polynomials using Algebra Tiles",
-      "activity_details": "Explore factorisation of quadratic polynomials using interactive algebra tiles, factor-pair reasoning, visual grouping, prediction challenges, and multiplication-based verification.",
-      "activity_path": [
-        {
-          "label": "Interactive",
-          "path": "activities/quadratic-factorisation/index.html"
-        }
-      ]
-    }
+}
   ]
 }
