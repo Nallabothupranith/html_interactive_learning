@@ -1752,7 +1752,13 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Parallel Lines and a Transversal",
-      "activity_details": "Fix three strips (two parallel, one transversal). Measure corresponding, alternate, and interior angles."
+      "activity_details": "Fix three strips (two parallel, one transversal). Measure corresponding, alternate, and interior angles.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/parallel-lines-transversal/index.html"
+        }
+]
     },
     {
       "class": "IX-X",
