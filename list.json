@@ -1649,7 +1649,8 @@
       "subject": "Mathematics",
       "topic": "Magic Squares",
       "activity_name": "3x3 Magic Square (Magic Constant 15)",
-      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square."
+      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square.",
+      "activity_path": "activities/magic-square/"
     },
     {
       "class": "VI",
@@ -1746,14 +1747,16 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of a Triangle",
-      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties."
+      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties.",
+      "activity_path": "activities/properties-of-triangle/"
     },
     {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Mid-point Theorem",
-      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length."
+      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length.",
+      "activity_path": "activities/mid-point-theorem/"
     },
     {
       "class": "IX-X",
