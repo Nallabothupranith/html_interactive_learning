@@ -1631,7 +1631,8 @@
       "subject": "Mathematics",
       "topic": "Magic Squares",
       "activity_name": "3x3 Magic Square (Magic Constant 15)",
-      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square."
+      "activity_details": "Draw a 3x3 grid with outside squares. Arrange numbers 1-9 and transfer the outside numbers to form a magic square.",
+      "activity_path": "activities/magic-square/"
     },
     {
       "class": "VI",
@@ -1887,6 +1888,14 @@
       "activity_name": "Verification of Trigonometric Identities",
       "activity_details": "Use the circular board setup to verify identities like sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ."
     },
+    {
+     "class": "IX",
+     "subject": "Mathematics",
+     "topic": "Triangles",
+     "activity_name": "Properties of a Triangle",
+      "activity_details": "...",
+      "activity_path": "activities/properties-of-triangle/"
+   },
     {
       "class": "IX-X",
       "subject": "Mathematics",
