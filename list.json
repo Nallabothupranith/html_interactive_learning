@@ -759,7 +759,13 @@
       "subject": "Science",
       "topic": "Light",
       "activity_name": "Water Prism",
-      "activity_details": "Place a mirror in a water-filled tumbler, reflect sunlight to a wall, and observe the spectrum."
+      "activity_details": "Place a mirror in a water-filled tumbler, reflect sunlight to a wall, and observe the spectrum.",
+      "activity_path": [
+        {
+          "label": "Water Prism",
+          "path": "activities/Water Prism/index.html"
+        }
+      ]
     },
     {
       "class": "VII",
