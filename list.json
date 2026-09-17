@@ -1709,7 +1709,7 @@
           "label": "Interactive",
           "path": "activities/parallel-lines-transversal/index.html"
         }
-]
+        ]
     },
     {
       "class": "IX-X",
@@ -1758,7 +1758,13 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Median and Area of a Triangle",
-      "activity_details": "Draw a median in a triangle on a geoboard. Verify that it divides the triangle into two equal areas."
+      "activity_details": "Draw a median in a triangle on a geoboard. Verify that it divides the triangle into two equal areas.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/median-area-triangle/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
