@@ -164,7 +164,13 @@
       "subject": "Science",
       "topic": "Materials",
       "activity_name": "Compare Water Absorption Capacity of Fibres",
-      "activity_details": "Weigh dry cotton, wool, and nylon fabric pieces. Immerse in water, drip dry, and weigh wet fabric. Calculate the water absorbed per gram of fabric."
+      "activity_details": "Weigh dry cotton, wool, and nylon fabric pieces. Immerse in water, drip dry, and weigh wet fabric. Calculate the water absorbed per gram of fabric.",
+      "activity_path": [
+  {
+    "label": "Compare Water Absorption Capacity of Fibres",
+    "path": "activities/compare-water-absorption-capacity-of-fibres/index.html"
+  }
+]
     },
     {
       "class": "VI",
