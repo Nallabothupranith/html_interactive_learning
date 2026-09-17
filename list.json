@@ -760,7 +760,13 @@
       "subject": "Science",
       "topic": "Electric Current and its Effects",
       "activity_name": "Magnetic Effect",
-      "activity_details": "Place a compass needle near a wire connected to a cell/switch. Close the switch and observe the needle deflection."
+      "activity_details": "Place a compass needle near a wire connected to a cell/switch. Close the switch and observe the needle deflection.",
+      "activity_path": [
+        {
+          "label": "Magnetic Effect",
+          "path": "activities/Magnetic Effect/index.html"
+        }
+      ]
     },
     {
       "class": "VII",
