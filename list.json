@@ -1900,7 +1900,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Perpendicular from Centre to Chord",
-      "activity_details": "Draw a perpendicular from the centre of a circle to a chord. Verify that it bisects the chord."
+      "activity_details": "Draw a perpendicular from the centre of a circle to a chord. Verify that it bisects the chord.",
+      "activity_path": [
+        {
+          "label": "Perpendicular from Centre to Chord",
+          "path": "activities/perpendicular-from-centre-to-chord/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
