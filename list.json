@@ -1533,7 +1533,13 @@
       "subject": "Science",
       "topic": "Electricity",
       "activity_name": "Current and PD in Series and Parallel",
-      "activity_details": "Measure current and potential difference across resistors in series and parallel combinations."
+      "activity_details": "Measure current and potential difference across resistors in series and parallel combinations.",
+       "activity_path": [
+        {
+          "label": "Current and PD in Series and Parallel",
+          "path": "activities/Current-And-PD/index.html"
+        }
+      ]
     },
     {
       "class": "X",
