@@ -1945,7 +1945,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Tangents to a Circle",
-      "activity_details": "Draw tangents from an external point on a circular board. Verify that the lengths of the tangents are equal and the radius is perpendicular to the tangent."
+      "activity_details": "Draw tangents from an external point on a circular board. Verify that the lengths of the tangents are equal and the radius is perpendicular to the tangent.",
+      "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/tangents-to-circle/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
