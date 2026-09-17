@@ -8,6 +8,7 @@ variations inside a responsive iframe.
 Refer below links for Ideas
 - https://ncert.nic.in/science-laboratory-manual.php?ln=en
 - https://ncert.nic.in/school-kits-and-lab-manual.php?ln=en
+- https://cbseacademic.nic.in/web_material/QuestionBank/ClassX/MathsX.pdf
 
 ## Contributing Activities
 
