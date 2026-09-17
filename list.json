@@ -1965,7 +1965,13 @@
       "subject": "Mathematics",
       "topic": "Trigonometry",
       "activity_name": "Trigonometric Ratios of Special Angles",
-      "activity_details": "Use the circular board to find the values of trigonometric ratios for 0°, 30°, 45°, 60°, and 90°."
+      "activity_details": "Use the circular board to find the values of trigonometric ratios for 0°, 30°, 45°, 60°, and 90°.",
+      "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/special-angle-trigonometry/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
