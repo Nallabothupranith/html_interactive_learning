@@ -1893,6 +1893,20 @@
       "topic": "Mensuration",
       "activity_name": "Surface Area and Volume of Solids",
       "activity_details": "Use a cube with cut-outs of a cuboid, cylinder, cone, and hemisphere. Compare the change in volume and surface area after removing the cut-outs."
+    },
+
+    {
+      "class": "III",
+      "subject": "Science",
+     "topic": "Colours",
+      "activity_name": "Color Mixing Lab",
+      "activity_details": "Mix pairs of primary colors (red, yellow, blue) and predict the resulting secondary color before revealing it. Tracks correct guesses to encourage repeat attempts.",
+      "activity_path": [
+    {
+      "label": "Interactive",
+      "path": "activities/colour-mixing-lab/index.html"
     }
+  ]
+}
   ]
 }
