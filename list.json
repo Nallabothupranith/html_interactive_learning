@@ -1729,14 +1729,16 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of a Triangle",
-      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties."
+      "activity_details": "Form triangles with strips. Measure angles and sides to verify angle sum, exterior angle, and isosceles/equilateral properties.",
+      "activity_path": "activities/properties-of-triangle/"
     },
     {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Mid-point Theorem",
-      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length."
+      "activity_details": "Form a triangle, fix a strip at the mid-points of two sides. Verify that it is parallel to the third side and half its length.",
+      "activity_path": "activities/mid-point-theorem/"
     },
     {
       "class": "IX-X",
@@ -1888,14 +1890,6 @@
       "activity_name": "Verification of Trigonometric Identities",
       "activity_details": "Use the circular board setup to verify identities like sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ."
     },
-    {
-     "class": "IX",
-     "subject": "Mathematics",
-     "topic": "Triangles",
-     "activity_name": "Properties of a Triangle",
-      "activity_details": "...",
-      "activity_path": "activities/properties-of-triangle/"
-   },
     {
       "class": "IX-X",
       "subject": "Mathematics",
