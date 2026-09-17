@@ -1731,7 +1731,13 @@
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of Quadrilaterals",
-      "activity_details": "Form different quadrilaterals (parallelogram, rhombus, rectangle, square) with strips. Verify opposite sides, angles, and diagonal properties."
+      "activity_details": "Form different quadrilaterals (parallelogram, rhombus, rectangle, square) with strips. Verify opposite sides, angles, and diagonal properties.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/quadrilaterals/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
