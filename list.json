@@ -1884,7 +1884,13 @@
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Verification of (a+b)² and (a-b)²",
-      "activity_details": "Arrange square and rectangular cut-outs to verify (a+b)² = a²+2ab+b² and (a-b)² = a²-2ab+b²."
+      "activity_details": "Arrange square and rectangular cut-outs to verify (a+b)² = a²+2ab+b² and (a-b)² = a²-2ab+b².",
+        "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/algebraic-identities/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
@@ -1898,7 +1904,13 @@
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Factorisation of Quadratic Polynomial",
-      "activity_details": "Use algebraic tiles (x², x, 1) to factorise expressions like x²+5x+6, x²-x-6, 2x²-7x+6."
+      "activity_details": "Use algebraic tiles (x², x, 1) to factorise expressions like x²+5x+6, x²-x-6, 2x²-7x+6.",
+      "activity_path": [
+        {
+          "label": "Interactive",
+          "path": "activities/quadratic-factorisation/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
@@ -1939,7 +1951,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Tangents to a Circle",
-      "activity_details": "Draw tangents from an external point on a circular board. Verify that the lengths of the tangents are equal and the radius is perpendicular to the tangent."
+      "activity_details": "Draw tangents from an external point on a circular board. Verify that the lengths of the tangents are equal and the radius is perpendicular to the tangent.",
+      "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/tangents-to-circle/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
@@ -1953,7 +1971,13 @@
       "subject": "Mathematics",
       "topic": "Trigonometry",
       "activity_name": "Trigonometric Ratios of Special Angles",
-      "activity_details": "Use the circular board to find the values of trigonometric ratios for 0°, 30°, 45°, 60°, and 90°."
+      "activity_details": "Use the circular board to find the values of trigonometric ratios for 0°, 30°, 45°, 60°, and 90°.",
+      "activity_path": [
+          {
+            "label": "Interactive",
+            "path": "activities/special-angle-trigonometry/index.html"
+          }
+        ]
     },
     {
       "class": "IX-X",
@@ -1962,14 +1986,13 @@
       "activity_name": "Verification of Trigonometric Identities",
       "activity_details": "Use the circular board setup to verify identities like sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ."
     },
-    {
+        {
       "class": "IX-X",
       "subject": "Mathematics",
       "topic": "Mensuration",
       "activity_name": "Surface Area and Volume of Solids",
       "activity_details": "Use a cube with cut-outs of a cuboid, cylinder, cone, and hemisphere. Compare the change in volume and surface area after removing the cut-outs."
     },
-
     {
       "class": "III",
       "subject": "Science",
@@ -1977,11 +2000,11 @@
       "activity_name": "Color Mixing Lab",
       "activity_details": "Mix pairs of primary colors (red, yellow, blue) and predict the resulting secondary color before revealing it. Tracks correct guesses to encourage repeat attempts.",
       "activity_path": [
-    {
-      "label": "Interactive",
-      "path": "activities/colour-mixing-lab/index.html"
-    }
-  ]
+        {
+          "label": "Interactive",
+          "path": "activities/colour-mixing-lab/index.html"
+        }
+      ]
 }
   ]
 }
