@@ -469,7 +469,13 @@
       "subject": "Science",
       "topic": "Natural Phenomena",
       "activity_name": "Observe Moon Phases",
-      "activity_details": "Use a half-painted ball. Stand at the centre of a circle as your friend moves the ball along the circle, keeping the white side facing the sun. Observe the visible white portion."
+      "activity_details": "Use a half-painted ball. Stand at the centre of a circle as your friend moves the ball along the circle, keeping the white side facing the sun. Observe the visible white portion.",
+      "activity_path": [
+        {
+            "label": "Observe Moon Phases",
+            "path": "activities/Observe-Moon-Phases/index.html"
+        }
+      ]
     },
     {
       "class": "VI",
