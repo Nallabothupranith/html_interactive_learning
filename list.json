@@ -1950,7 +1950,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Cyclic Quadrilateral",
-      "activity_details": "Form a cyclic quadrilateral on a circular board. Measure opposite angles and verify their sum is 180°."
+      "activity_details": "Form a cyclic quadrilateral on a circular board. Measure opposite angles and verify their sum is 180°.",
+      "activity_path": [
+        {
+          "label": "Cyclic Quadrilateral",
+          "path": "activities/cyclic-quadrilateral/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
