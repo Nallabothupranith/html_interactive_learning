@@ -456,7 +456,13 @@
       "subject": "Science",
       "topic": "Natural Phenomena",
       "activity_name": "Verify Laws of Reflection",
-      "activity_details": "Use a plane mirror, knitting needles, and a protractor. Trace the incident and reflected rays, measure the angles, and verify that angle of incidence equals angle of reflection."
+      "activity_details": "Use a plane mirror, knitting needles, and a protractor. Trace the incident and reflected rays, measure the angles, and verify that angle of incidence equals angle of reflection.",
+      "activity_path": [
+        {
+          "label": "Verify Laws of Reflection",
+          "path": "activities/Verify-Laws-of-Reflection/index.html"
+        }
+      ] 
     },
     {
       "class": "VI",
