@@ -1917,7 +1917,13 @@
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Angle Subtended by Chords at Centre",
-      "activity_details": "Fix plastic strips as chords on a circular board. Measure the angles subtended at the centre to verify equal chords subtend equal angles and vice-versa."
+      "activity_details": "Fix plastic strips as chords on a circular board. Measure the angles subtended at the centre to verify equal chords subtend equal angles and vice-versa.",
+      "activity_path": [
+        {
+          "label": "Angle Subtended by Chords at Centre",
+          "path": "activities/angle-subtended-by-chords-at-centre/index.html"
+        }
+      ]
     },
     {
       "class": "IX-X",
