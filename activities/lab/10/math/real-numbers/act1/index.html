@@ -241,17 +241,8 @@
   <!-- ============ START SCREEN ============ -->
   <section id="screen-start" class="screen active">
     <div class="card">
-      <h2>Student Details</h2>
-      <div class="field">
-        <label for="inpName">Student Name</label>
-        <input type="text" id="inpName" placeholder="Enter your full name" autocomplete="off">
-      </div>
-      <div class="field">
-        <label for="inpRoll">Roll Number</label>
-        <input type="text" id="inpRoll" placeholder="Enter your roll number" autocomplete="off">
-      </div>
+      <h2>Ready to begin?</h2>
       <button class="btn primary" id="startBtn">Start Exam</button>
-      <div class="err" id="startErr"></div>
     </div>
 
     <div class="card">
@@ -279,7 +270,6 @@
   <!-- ============ EXAM SCREEN ============ -->
   <section id="screen-exam" class="screen">
     <div class="exam-top">
-      <div class="student-chip" id="studentChip"></div>
       <div class="progress-text" id="progressText"></div>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
@@ -396,8 +386,6 @@ function num(id, root = document){
    ========================================================= */
 
 const state = {
-  name: "",
-  roll: "",
   idx: 0,
   results: [],          // per-practical result object
   tests: 0,             // total checks / tests performed
@@ -1763,8 +1751,6 @@ function buildResultText(){
   let out = "";
   out += "REAL NUMBERS — MATH LAB PRACTICAL RESULT\n";
   out += "=========================================\n";
-  out += `Student: ${state.name}\n`;
-  out += `Roll No: ${state.roll}\n`;
   out += "Class: X\n";
   out += "Topic: Real Numbers\n\n";
   out += `Score: ${total}/${TOTAL_MAX}\n`;
@@ -1833,7 +1819,7 @@ function buildResultScreen(){
     <div class="result-hero">
       <h2>MATH LAB PRACTICAL — RESULT SUMMARY</h2>
       <div class="score-big">${total} / ${TOTAL_MAX}</div>
-      <div class="score-sub">${esc(state.name)} &nbsp;•&nbsp; Roll No: ${esc(state.roll)} &nbsp;•&nbsp; Class X</div>
+      <div class="score-sub">Class X</div>
       <div class="score-sub" style="margin-top:5px;font-size:1.05rem;font-weight:700">${pct}%</div>
       <div class="score-sub" style="margin-top:4px">Topic: Real Numbers</div>
     </div>
@@ -1962,17 +1948,12 @@ function finishExam(){
 }
 
 function restartExam(){
-  state.name = "";
-  state.roll = "";
   state.idx = 0;
   state.results = [];
   state.tests = 0;
   state.practicalTested = [];
   state.finished = false;
 
-  document.getElementById("inpName").value = "";
-  document.getElementById("inpRoll").value = "";
-  document.getElementById("startErr").textContent = "";
   document.getElementById("progressFill").style.width = "0%";
 
   showScreen("screen-start");
@@ -1983,35 +1964,16 @@ function restartExam(){
    ========================================================= */
 
 document.getElementById("startBtn").addEventListener("click", () => {
-  const name = document.getElementById("inpName").value.trim();
-  const roll = document.getElementById("inpRoll").value.trim();
-  const err  = document.getElementById("startErr");
-
-  if(!name){ err.textContent = "Please enter your name to begin."; return; }
-  if(!roll){ err.textContent = "Please enter your roll number to begin."; return; }
-
-  err.textContent = "";
-  state.name = name;
-  state.roll = roll;
   state.idx = 0;
   state.results = [];
   state.tests = 0;
   state.practicalTested = new Array(PRACTICALS.length).fill(false);
   state.finished = false;
 
-  document.getElementById("studentChip").textContent = `${name} · Roll ${roll}`;
-
   showScreen("screen-exam");
   renderPractical();
 });
 
-/* Enter key on start inputs */
-document.getElementById("inpRoll").addEventListener("keydown", (e) => {
-  if(e.key === "Enter") document.getElementById("startBtn").click();
-});
-document.getElementById("inpName").addEventListener("keydown", (e) => {
-  if(e.key === "Enter") document.getElementById("inpRoll").focus();
-});
 </script>
 </body>
 </html>
