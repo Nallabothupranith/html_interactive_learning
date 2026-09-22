@@ -90,6 +90,24 @@
   .case-study { border: 1.5px dashed var(--line); border-radius: 12px; padding: 14px; margin-bottom: 16px; background: #fbfbfe; }
   .case-study h4 { margin: 0 0 6px; color: var(--primary-dark); }
   .case-study p.scenario { font-size: 0.94rem; margin-bottom: 10px; }
+  .case-lab { display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(280px, 1.2fr); gap: 14px; margin: 14px 0 18px; }
+  .case-controls, .case-visual { border: 1px solid var(--line); border-radius: 12px; padding: 14px; background: #fff; }
+  .case-controls label { display: block; color: var(--primary-dark); font-weight: 700; margin-bottom: 8px; }
+  .case-controls input[type="range"] { width: 100%; }
+  .case-reading { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--primary-light); color: var(--primary-dark); line-height: 1.5; }
+  .case-reading strong { font-size: 1.12rem; }
+  .case-prompt { margin: 10px 0 0; color: var(--muted); font-size: 0.86rem; line-height: 1.45; }
+  .case-visual svg { display: block; width: 100%; height: auto; min-height: 190px; }
+  .case-grid { stroke: #e7eaf2; stroke-width: 1; }
+  .case-axis { stroke: #8c96a8; stroke-width: 1.5; }
+  .case-curve { fill: none; stroke: var(--primary); stroke-width: 3; }
+  .case-marker { fill: var(--accent); stroke: #fff; stroke-width: 2; }
+  .case-ground { stroke: var(--good); stroke-width: 3; }
+  .case-progress { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 6px 0 10px; }
+  .case-progress .progress-bar { flex: 1; margin: 0; }
+  .case-status { color: var(--primary-dark); font-size: 0.86rem; font-weight: 700; white-space: nowrap; }
+  .case-result { font-weight: 700; }
+  @media (max-width: 680px) { .case-lab { grid-template-columns: 1fr; } }
 
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 24px; }
 </style>
@@ -200,19 +218,43 @@
   <section class="panel" data-panel="exam">
     <div class="card">
       <h2>Exam Practice</h2>
-      <p class="lede">Two CBSE board-style case studies. Everything you need is in the scenario — no outside material required.</p>
+      <p class="lede">Explore each mathematical model first, then answer its CBSE board-style questions. Incorrect choices stay retryable for learning; your first attempt is recorded for exam practice.</p>
     </div>
 
     <div class="case-study">
       <h4>Case Study 1 — Fountain Jet</h4>
       <p class="scenario">A jet of water from a garden fountain follows the path <strong>h(t) = −t² + 6t</strong>, where h is the height in metres and t is the time in seconds after the water leaves the nozzle.</p>
+      <div class="case-lab">
+        <div class="case-controls">
+          <label for="fountain-time">Explore time: <output id="fountain-time-out">0</output> seconds</label>
+          <input id="fountain-time" type="range" min="0" max="6" step="0.1" value="0" />
+          <p class="case-reading">Water height: <strong><span id="fountain-height">0</span> m</strong></p>
+          <p class="case-prompt">Move the slider and notice when the height rises, reaches its maximum, and returns to zero.</p>
+        </div>
+        <div class="case-visual">
+          <svg id="fountain-graph" viewBox="0 0 420 230" role="img" aria-label="Interactive graph of fountain height against time"></svg>
+        </div>
+      </div>
       <div id="exam1-area"></div>
+      <div class="btn-row"><button class="btn secondary" id="exam1-reset" type="button">Reset case study</button></div>
     </div>
 
     <div class="case-study">
       <h4>Case Study 2 — Parabolic Arch</h4>
       <p class="scenario">An architect is designing a parabolic arch. In a cross-section drawn on a coordinate grid (x and y in metres), the arch meets the ground at <strong>x = −4</strong> and <strong>x = 4</strong>, and the very top of the arch is directly above the midpoint, at the point <strong>(0, 8)</strong>.</p>
+      <div class="case-lab">
+        <div class="case-controls">
+          <label for="arch-position">Explore horizontal position: x = <output id="arch-position-out">0</output> m</label>
+          <input id="arch-position" type="range" min="-4" max="4" step="0.1" value="0" />
+          <p class="case-reading">Arch height: <strong><span id="arch-height">8</span> m</strong></p>
+          <p class="case-prompt">Move across the arch and look for symmetry, the zeroes, and the maximum height.</p>
+        </div>
+        <div class="case-visual">
+          <svg id="arch-graph" viewBox="0 0 420 230" role="img" aria-label="Interactive cross-section of the parabolic arch"></svg>
+        </div>
+      </div>
       <div id="exam2-area"></div>
+      <div class="btn-row"><button class="btn secondary" id="exam2-reset" type="button">Reset case study</button></div>
     </div>
   </section>
 
@@ -478,27 +520,110 @@
      EXAM PRACTICE
      ========================================================= */
   (function examModule() {
-    function quizBlock(container, items) {
+    function quizBlock(container, items, resetButton) {
+      const state = items.map(() => ({ attempts: 0, solved: false, firstTry: false }));
+
+      function updateProgress() {
+        const solved = state.filter(item => item.solved).length;
+        const firstTry = state.filter(item => item.firstTry).length;
+        const fill = container.querySelector(".case-progress .progress-fill");
+        const status = container.querySelector(".case-status");
+        const result = container.querySelector(".case-result");
+        fill.style.width = (solved / items.length * 100) + "%";
+        status.textContent = solved + " / " + items.length + " mastered";
+        if (solved === items.length) {
+          result.style.display = "block";
+          result.className = "feedback case-result " + (firstTry === items.length ? "correct" : "info");
+          result.textContent = "Case complete — first-attempt exam score: " + firstTry + " / " + items.length + ". " +
+            (firstTry === items.length ? "Excellent exam readiness!" : "Reset and try again to improve your exam score.");
+        }
+      }
+
+      function render() {
       let html = "";
+      html += `<div class="case-progress"><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div><span class="case-status">0 / ${items.length} mastered</span></div>`;
       items.forEach((item, qi) => {
         html += `<div class="quiz-q" style="margin-top:14px;">${qi + 1}. ${item.q}</div><div class="quiz-opts" data-qi="${qi}">`;
         item.options.forEach((opt, i) => { html += `<button class="quiz-opt" data-qi="${qi}" data-i="${i}" type="button">${opt}</button>`; });
         html += `</div><p class="feedback" id="${container.id}-fb-${qi}" style="display:none;"></p>`;
       });
+      html += `<p class="feedback case-result" style="display:none;"></p>`;
       container.innerHTML = html;
       container.querySelectorAll(".quiz-opt").forEach(btn => {
         btn.addEventListener("click", () => {
           const qi = parseInt(btn.dataset.qi, 10), i = parseInt(btn.dataset.i, 10);
           const item = items[qi];
+          const questionState = state[qi];
+          if (questionState.solved) return;
+          questionState.attempts++;
           const group = container.querySelectorAll(`.quiz-opt[data-qi="${qi}"]`);
-          group.forEach(b => b.disabled = true);
-          group[item.answer].classList.add("correct");
           const fb = document.getElementById(container.id + "-fb-" + qi);
           fb.style.display = "block";
-          if (i === item.answer) { fb.className = "feedback correct"; fb.textContent = "Correct! " + item.explain; }
-          else { group[i].classList.add("incorrect"); fb.className = "feedback incorrect"; fb.textContent = "Not quite. " + item.explain; }
+          if (i === item.answer) {
+            questionState.solved = true;
+            questionState.firstTry = questionState.attempts === 1;
+            group.forEach(button => button.disabled = true);
+            group[item.answer].classList.add("correct");
+            fb.className = "feedback correct";
+            fb.textContent = (questionState.firstTry ? "Correct on the first attempt! " : "Correct — good recovery! ") + item.explain;
+            updateProgress();
+          } else {
+            btn.disabled = true;
+            btn.classList.add("incorrect");
+            fb.className = "feedback incorrect";
+            fb.textContent = "Not quite. Use the scenario or interactive model, then try another answer.";
+          }
         });
       });
+      updateProgress();
+      }
+
+      resetButton.addEventListener("click", () => {
+        state.forEach(item => { item.attempts = 0; item.solved = false; item.firstTry = false; });
+        render();
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+
+      render();
+    }
+
+    function interactiveCurve(config) {
+      const slider = document.getElementById(config.sliderId);
+      const sliderOutput = document.getElementById(config.outputId);
+      const valueOutput = document.getElementById(config.valueId);
+      const svg = document.getElementById(config.svgId);
+      const width = 420, height = 230, left = 38, right = 16, top = 16, bottom = 30;
+      const plotWidth = width - left - right, plotHeight = height - top - bottom;
+      const mapX = x => left + (x - config.xMin) / (config.xMax - config.xMin) * plotWidth;
+      const mapY = y => top + (config.yMax - y) / (config.yMax - config.yMin) * plotHeight;
+
+      function render() {
+        const x = parseFloat(slider.value), y = config.fn(x);
+        sliderOutput.textContent = fmtNum(x);
+        valueOutput.textContent = fmtNum(y);
+        let html = "";
+        for (let gx = Math.ceil(config.xMin); gx <= config.xMax; gx++) {
+          html += `<line class="case-grid" x1="${mapX(gx)}" y1="${top}" x2="${mapX(gx)}" y2="${height - bottom}"></line>`;
+        }
+        for (let gy = 0; gy <= config.yMax; gy += 2) {
+          html += `<line class="case-grid" x1="${left}" y1="${mapY(gy)}" x2="${width - right}" y2="${mapY(gy)}"></line>`;
+          html += `<text class="tick-label" x="${left - 6}" y="${mapY(gy) + 3}" text-anchor="end">${gy}</text>`;
+        }
+        html += `<line class="case-ground" x1="${left}" y1="${mapY(0)}" x2="${width - right}" y2="${mapY(0)}"></line>`;
+        if (config.xMin <= 0 && config.xMax >= 0) html += `<line class="case-axis" x1="${mapX(0)}" y1="${top}" x2="${mapX(0)}" y2="${height - bottom}"></line>`;
+        let path = "";
+        for (let i = 0; i <= 100; i++) {
+          const px = config.xMin + (config.xMax - config.xMin) * i / 100;
+          path += (i ? "L" : "M") + mapX(px).toFixed(1) + "," + mapY(config.fn(px)).toFixed(1) + " ";
+        }
+        html += `<path class="case-curve" d="${path}"></path>`;
+        html += `<circle class="case-marker" cx="${mapX(x)}" cy="${mapY(y)}" r="7"></circle>`;
+        html += `<text class="tick-label" x="${mapX(x)}" y="${Math.max(top + 10, mapY(y) - 12)}" text-anchor="middle">(${fmtNum(x)}, ${fmtNum(y)})</text>`;
+        svg.innerHTML = html;
+      }
+
+      slider.addEventListener("input", render);
+      render();
     }
 
     const exam1 = [
@@ -516,8 +641,16 @@
       { q: "The actual arch is a scaled version, k(x² − 16), passing through the apex (0, 8). What is k?", options: ["k = 2", "k = −1/2", "k = 1/2", "k = −2"], answer: 1, explain: "At x = 0: k(0 − 16) = 8, so −16k = 8, giving k = −1/2." }
     ];
 
-    quizBlock(document.getElementById("exam1-area"), exam1);
-    quizBlock(document.getElementById("exam2-area"), exam2);
+    interactiveCurve({
+      sliderId: "fountain-time", outputId: "fountain-time-out", valueId: "fountain-height", svgId: "fountain-graph",
+      xMin: 0, xMax: 6, yMin: 0, yMax: 10, fn: t => -t * t + 6 * t
+    });
+    interactiveCurve({
+      sliderId: "arch-position", outputId: "arch-position-out", valueId: "arch-height", svgId: "arch-graph",
+      xMin: -4, xMax: 4, yMin: 0, yMax: 9, fn: x => -0.5 * (x * x - 16)
+    });
+    quizBlock(document.getElementById("exam1-area"), exam1, document.getElementById("exam1-reset"));
+    quizBlock(document.getElementById("exam2-area"), exam2, document.getElementById("exam2-reset"));
   })();
 })();
 </script>
