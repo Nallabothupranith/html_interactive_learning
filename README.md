@@ -32,7 +32,7 @@ Good activities should be useful for both teachers and students:
 ```text
 .
 ├── index.html
-├── list.json                         # generated; do not edit
+├── list.json                         # generated locally; ignored by Git
 ├── scripts/
 │   └── generate_catalog.rb
 └── activities/
@@ -79,8 +79,21 @@ paths:
 ```
 
 Use short, student-friendly labels. External `https://` paths are also
-supported. Do not edit `list.json`; it is generated from all `activity.md`
-files.
+supported. Do not edit or commit `list.json`; it is generated from all
+`activity.md` files.
+
+## Local Build and Preview
+
+Ruby is the only build requirement. From the repository root, generate the
+catalog and start a local web server:
+
+```sh
+ruby scripts/generate_catalog.rb
+python3 -m http.server 8000
+```
+
+Open `http://127.0.0.1:8000/`. Run the generator again whenever an
+`activity.md` file changes, then refresh the browser.
 
 To validate metadata without changing the catalog:
 
@@ -95,8 +108,17 @@ ruby scripts/generate_catalog.rb
 ruby scripts/generate_catalog.rb --check
 ```
 
-Pull requests validate the metadata automatically. After a change reaches
-`main`, GitHub Actions regenerates and commits `list.json`.
+Pull requests generate the catalog to validate all metadata and local paths.
+After a change reaches `main`, GitHub Actions generates `list.json` inside a
+GitHub Pages artifact and deploys that artifact. The generated file is never
+committed to Git.
+
+## GitHub Pages Deployment
+
+The repository must use **GitHub Actions** as its Pages publishing source. An
+administrator can select it under **Settings → Pages → Build and deployment →
+Source**. The `Deploy GitHub Pages` workflow then builds and publishes the site
+on every push to `main`; no generated catalog commit is required.
 
 ## Suggested Workflow
 
@@ -105,7 +127,7 @@ Pull requests validate the metadata automatically. After a change reaches
 3. Add `index.html` beside that metadata file.
 4. Add a `paths` entry to `activity.md`.
 5. Build and test the activity at phone, tablet, and desktop widths.
-6. Validate the metadata and run a local server from the project root:
+6. Build and run a local server from the project root:
 
 ```sh
 ruby scripts/generate_catalog.rb

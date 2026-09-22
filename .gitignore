@@ -2,3 +2,6 @@
 .DS_Store
 Thumbs.db
 ehthumbs.db
+
+# Generated locally and during GitHub Pages deployment
+list.json
