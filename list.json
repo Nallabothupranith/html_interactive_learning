@@ -2047,6 +2047,19 @@
           "path": "activities/colour-mixing-lab/index.html"
         }
       ]
+    },
+    {
+      "class": "X",
+      "subject": "Mathematics",
+      "topic": "Real Numbers",
+      "activity_name": "Real Numbers Math Lab",
+      "activity_details": "Complete an interactive mathematics lab practical covering prime factorisation, HCF and LCM, the Fundamental Theorem of Arithmetic, Euclid's division algorithm, and decimal expansions of rational numbers.",
+      "activity_path": [
+        {
+          "label": "Practical Exam",
+          "path": "activities/lab/10/math/real-numbers/act1/index.html"
+        }
+      ]
     }
   ]
 }
