@@ -107,6 +107,9 @@
   .case-progress .progress-bar { flex: 1; margin: 0; }
   .case-status { color: var(--primary-dark); font-size: 0.86rem; font-weight: 700; white-space: nowrap; }
   .case-result { font-weight: 700; }
+  .language-picker { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+  .language-picker label { color: var(--primary-dark); font-weight: 700; }
+  .language-picker select { font: inherit; min-height: 42px; padding: 7px 10px; border: 2px solid var(--primary); border-radius: 10px; background: #fff; color: var(--primary-dark); }
   @media (max-width: 680px) { .case-lab { grid-template-columns: 1fr; } }
 
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 24px; }
@@ -217,19 +220,23 @@
   <!-- ================= EXAM PRACTICE ================= -->
   <section class="panel" data-panel="exam">
     <div class="card">
-      <h2>Exam Practice</h2>
-      <p class="lede">Explore each mathematical model first, then answer its CBSE board-style questions. Incorrect choices stay retryable for learning; your first attempt is recorded for exam practice.</p>
+      <h2 id="exam-heading">Exam Practice</h2>
+      <p class="lede" id="exam-intro">Explore each mathematical model first, then answer its CBSE board-style questions. Incorrect choices stay retryable for learning; your first attempt is recorded for exam practice.</p>
+      <div class="language-picker">
+        <label for="exam-language" id="language-label">Preferred language</label>
+        <select id="exam-language"><option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option></select>
+      </div>
     </div>
 
     <div class="case-study">
-      <h4>Case Study 1 — Fountain Jet</h4>
-      <p class="scenario">A jet of water from a garden fountain follows the path <strong>h(t) = −t² + 6t</strong>, where h is the height in metres and t is the time in seconds after the water leaves the nozzle.</p>
+      <h4 id="case1-title">Case Study 1 — Fountain Jet</h4>
+      <p class="scenario" id="case1-scenario">A jet of water from a garden fountain follows the path <strong>h(t) = −t² + 6t</strong>, where h is the height in metres and t is the time in seconds after the water leaves the nozzle.</p>
       <div class="case-lab">
         <div class="case-controls">
-          <label for="fountain-time">Explore time: <output id="fountain-time-out">0</output> seconds</label>
+          <label for="fountain-time"><span id="time-label">Explore time</span>: <output id="fountain-time-out">0</output> <span id="seconds-label">seconds</span></label>
           <input id="fountain-time" type="range" min="0" max="6" step="0.1" value="0" />
-          <p class="case-reading">Water height: <strong><span id="fountain-height">0</span> m</strong></p>
-          <p class="case-prompt">Move the slider and notice when the height rises, reaches its maximum, and returns to zero.</p>
+          <p class="case-reading"><span id="water-height-label">Water height</span>: <strong><span id="fountain-height">0</span> m</strong></p>
+          <p class="case-prompt" id="fountain-prompt">Move the slider and notice when the height rises, reaches its maximum, and returns to zero.</p>
         </div>
         <div class="case-visual">
           <svg id="fountain-graph" viewBox="0 0 420 230" role="img" aria-label="Interactive graph of fountain height against time"></svg>
@@ -240,14 +247,14 @@
     </div>
 
     <div class="case-study">
-      <h4>Case Study 2 — Parabolic Arch</h4>
-      <p class="scenario">An architect is designing a parabolic arch. In a cross-section drawn on a coordinate grid (x and y in metres), the arch meets the ground at <strong>x = −4</strong> and <strong>x = 4</strong>, and the very top of the arch is directly above the midpoint, at the point <strong>(0, 8)</strong>.</p>
+      <h4 id="case2-title">Case Study 2 — Parabolic Arch</h4>
+      <p class="scenario" id="case2-scenario">An architect is designing a parabolic arch. In a cross-section drawn on a coordinate grid (x and y in metres), the arch meets the ground at <strong>x = −4</strong> and <strong>x = 4</strong>, and the very top of the arch is directly above the midpoint, at the point <strong>(0, 8)</strong>.</p>
       <div class="case-lab">
         <div class="case-controls">
-          <label for="arch-position">Explore horizontal position: x = <output id="arch-position-out">0</output> m</label>
+          <label for="arch-position"><span id="position-label">Explore horizontal position</span>: x = <output id="arch-position-out">0</output> m</label>
           <input id="arch-position" type="range" min="-4" max="4" step="0.1" value="0" />
-          <p class="case-reading">Arch height: <strong><span id="arch-height">8</span> m</strong></p>
-          <p class="case-prompt">Move across the arch and look for symmetry, the zeroes, and the maximum height.</p>
+          <p class="case-reading"><span id="arch-height-label">Arch height</span>: <strong><span id="arch-height">8</span> m</strong></p>
+          <p class="case-prompt" id="arch-prompt">Move across the arch and look for symmetry, the zeroes, and the maximum height.</p>
         </div>
         <div class="case-visual">
           <svg id="arch-graph" viewBox="0 0 420 230" role="img" aria-label="Interactive cross-section of the parabolic arch"></svg>
@@ -520,6 +527,21 @@
      EXAM PRACTICE
      ========================================================= */
   (function examModule() {
+    const languageSelect = document.getElementById("exam-language");
+    const language = new URLSearchParams(location.search).get("examLang") || "en";
+    const copy = {
+      en:{heading:"Exam Practice",intro:"Explore each mathematical model first, then answer its CBSE board-style questions. Incorrect choices stay retryable for learning; your first attempt is recorded for exam practice.",preferred:"Preferred language",case1:"Case Study 1 — Fountain Jet",scenario1:"A jet of water from a garden fountain follows <strong>h(t) = −t² + 6t</strong>, where h is height in metres and t is time in seconds.",time:"Explore time",seconds:"seconds",water:"Water height",fountainPrompt:"Move the slider and notice when the height rises, reaches its maximum, and returns to zero.",case2:"Case Study 2 — Parabolic Arch",scenario2:"A parabolic arch meets the ground at <strong>x = −4</strong> and <strong>x = 4</strong>, with its highest point at <strong>(0, 8)</strong>.",position:"Explore horizontal position",archHeight:"Arch height",archPrompt:"Move across the arch and look for symmetry, the zeroes, and the maximum height.",reset:"Reset case study",mastered:"mastered",first:"Correct on the first attempt! ",recovery:"Correct — good recovery! ",retry:"Not quite. Use the scenario or interactive model, then try another answer.",complete:"Case complete — first-attempt exam score: {score} / {total}.",excellent:" Excellent exam readiness!",improve:" Reset and try again to improve your exam score."},
+      hi:{heading:"परीक्षा अभ्यास",intro:"पहले प्रत्येक गणितीय मॉडल को समझें, फिर CBSE शैली के प्रश्न हल करें। गलत उत्तर दोबारा प्रयास किए जा सकते हैं; पहला प्रयास परीक्षा अभ्यास के लिए दर्ज होगा।",preferred:"पसंदीदा भाषा",case1:"केस स्टडी 1 — फव्वारे की जलधारा",scenario1:"बगीचे के फव्वारे की जलधारा <strong>h(t) = −t² + 6t</strong> पथ पर चलती है, जहाँ h मीटर में ऊँचाई और t सेकंड में समय है।",time:"समय देखें",seconds:"सेकंड",water:"पानी की ऊँचाई",fountainPrompt:"स्लाइडर चलाकर देखें कि ऊँचाई कब बढ़ती है, अधिकतम होती है और फिर शून्य होती है।",case2:"केस स्टडी 2 — परवलयाकार मेहराब",scenario2:"एक परवलयाकार मेहराब जमीन को <strong>x = −4</strong> और <strong>x = 4</strong> पर छूता है तथा उसका उच्चतम बिंदु <strong>(0, 8)</strong> है।",position:"क्षैतिज स्थिति देखें",archHeight:"मेहराब की ऊँचाई",archPrompt:"मेहराब पर चलते हुए सममिति, शून्यक और अधिकतम ऊँचाई पहचानें।",reset:"केस स्टडी रीसेट करें",mastered:"पूरे",first:"पहले प्रयास में सही! ",recovery:"सही — अच्छा सुधार! ",retry:"अभी सही नहीं। परिस्थिति या इंटरैक्टिव मॉडल देखें और दूसरा उत्तर चुनें।",complete:"केस पूरा — प्रथम-प्रयास परीक्षा अंक: {score} / {total}।",excellent:" बहुत अच्छी परीक्षा तैयारी!",improve:" अंक सुधारने के लिए रीसेट करके फिर प्रयास करें।"},
+      te:{heading:"పరీక్ష అభ్యాసం",intro:"మొదట ప్రతి గణిత నమూనాను పరిశీలించి, తరువాత CBSE తరహా ప్రశ్నలకు సమాధానమివ్వండి. తప్పు సమాధానాన్ని మళ్లీ ప్రయత్నించవచ్చు; మొదటి ప్రయత్నం పరీక్ష అభ్యాసం కోసం నమోదు అవుతుంది.",preferred:"ఇష్టమైన భాష",case1:"కేస్ స్టడీ 1 — ఫౌంటెన్ నీటి ధార",scenario1:"తోట ఫౌంటెన్‌లోని నీటి ధార <strong>h(t) = −t² + 6t</strong> మార్గంలో కదులుతుంది. ఇక్కడ h మీటర్లలో ఎత్తు, t సెకన్లలో సమయం.",time:"సమయాన్ని పరిశీలించండి",seconds:"సెకన్లు",water:"నీటి ఎత్తు",fountainPrompt:"స్లైడర్‌ను కదిలించి ఎత్తు ఎప్పుడు పెరుగుతుందో, గరిష్ఠానికి చేరుతుందో, తిరిగి సున్నా అవుతుందో గమనించండి.",case2:"కేస్ స్టడీ 2 — పరవలయాకార తోరణం",scenario2:"పరవలయాకార తోరణం నేలను <strong>x = −4</strong>, <strong>x = 4</strong> వద్ద తాకుతుంది; దాని గరిష్ఠ బిందువు <strong>(0, 8)</strong>.",position:"అడ్డ స్థానాన్ని పరిశీలించండి",archHeight:"తోరణం ఎత్తు",archPrompt:"తోరణం వెంట కదిలి సమమితి, శూన్యాలు మరియు గరిష్ఠ ఎత్తును గమనించండి.",reset:"కేస్ స్టడీని రీసెట్ చేయండి",mastered:"పూర్తయ్యాయి",first:"మొదటి ప్రయత్నంలో సరైంది! ",recovery:"సరైంది — మంచి ప్రయత్నం! ",retry:"ఇంకా సరైంది కాదు. సందర్భం లేదా నమూనాను చూసి మరో సమాధానం ప్రయత్నించండి.",complete:"కేస్ పూర్తి — మొదటి ప్రయత్న పరీక్ష స్కోరు: {score} / {total}.",excellent:" అద్భుతమైన పరీక్ష సిద్ధత!",improve:" స్కోరు మెరుగుపరచడానికి రీసెట్ చేసి మళ్లీ ప్రయత్నించండి."}
+    };
+    const t = copy[language] || copy.en;
+    const staticText={"exam-heading":"heading","exam-intro":"intro","language-label":"preferred","case1-title":"case1","time-label":"time","seconds-label":"seconds","water-height-label":"water","fountain-prompt":"fountainPrompt","case2-title":"case2","position-label":"position","arch-height-label":"archHeight","arch-prompt":"archPrompt"};
+    Object.entries(staticText).forEach(([id,key])=>document.getElementById(id).textContent=t[key]);
+    document.getElementById("case1-scenario").innerHTML=t.scenario1; document.getElementById("case2-scenario").innerHTML=t.scenario2;
+    document.getElementById("exam1-reset").textContent=t.reset; document.getElementById("exam2-reset").textContent=t.reset;
+    languageSelect.value=language; languageSelect.addEventListener("change",()=>{const url=new URL(location.href);url.searchParams.set("examLang",languageSelect.value);url.hash="exam";location.href=url;});
+    if(location.hash==="#exam") switchPanel("exam");
+
     function quizBlock(container, items, resetButton) {
       const state = items.map(() => ({ attempts: 0, solved: false, firstTry: false }));
 
@@ -530,18 +552,17 @@
         const status = container.querySelector(".case-status");
         const result = container.querySelector(".case-result");
         fill.style.width = (solved / items.length * 100) + "%";
-        status.textContent = solved + " / " + items.length + " mastered";
+        status.textContent = solved + " / " + items.length + " " + t.mastered;
         if (solved === items.length) {
           result.style.display = "block";
           result.className = "feedback case-result " + (firstTry === items.length ? "correct" : "info");
-          result.textContent = "Case complete — first-attempt exam score: " + firstTry + " / " + items.length + ". " +
-            (firstTry === items.length ? "Excellent exam readiness!" : "Reset and try again to improve your exam score.");
+          result.textContent = t.complete.replace("{score}",firstTry).replace("{total}",items.length) + (firstTry===items.length?t.excellent:t.improve);
         }
       }
 
       function render() {
       let html = "";
-      html += `<div class="case-progress"><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div><span class="case-status">0 / ${items.length} mastered</span></div>`;
+      html += `<div class="case-progress"><div class="progress-bar"><div class="progress-fill" style="width:0%"></div></div><span class="case-status">0 / ${items.length} ${t.mastered}</span></div>`;
       items.forEach((item, qi) => {
         html += `<div class="quiz-q" style="margin-top:14px;">${qi + 1}. ${item.q}</div><div class="quiz-opts" data-qi="${qi}">`;
         item.options.forEach((opt, i) => { html += `<button class="quiz-opt" data-qi="${qi}" data-i="${i}" type="button">${opt}</button>`; });
@@ -565,13 +586,13 @@
             group.forEach(button => button.disabled = true);
             group[item.answer].classList.add("correct");
             fb.className = "feedback correct";
-            fb.textContent = (questionState.firstTry ? "Correct on the first attempt! " : "Correct — good recovery! ") + item.explain;
+            fb.textContent = (questionState.firstTry ? t.first : t.recovery) + item.explain;
             updateProgress();
           } else {
             btn.disabled = true;
             btn.classList.add("incorrect");
             fb.className = "feedback incorrect";
-            fb.textContent = "Not quite. Use the scenario or interactive model, then try another answer.";
+            fb.textContent = t.retry;
           }
         });
       });
@@ -640,6 +661,22 @@
       { q: "Which monic quadratic (leading coefficient 1) has zeroes −4 and 4?", options: ["x² − 16", "x² + 16", "x² − 8x", "x² + 8x − 16"], answer: 0, explain: "x² − (sum)x + (product) = x² − 0x + (−16) = x² − 16." },
       { q: "The actual arch is a scaled version, k(x² − 16), passing through the apex (0, 8). What is k?", options: ["k = 2", "k = −1/2", "k = 1/2", "k = −2"], answer: 1, explain: "At x = 0: k(0 − 16) = 8, so −16k = 8, giving k = −1/2." }
     ];
+
+    const localizedQuestions={
+      hi:["पानी अधिकतम ऊँचाई पर किस समय पहुँचता है?","पानी की अधिकतम ऊँचाई क्या है?","नोज़ल छोड़ने के कितने सेकंड बाद पानी फिर जमीन पर पहुँचता है (h = 0)?","h(t) = −t² + 6t के शून्यक क्या हैं?","यह परवलय ऊपर खुलता है या नीचे, और क्यों?","शून्यक −4 और 4 हैं। उनका योग क्या है?","−4 और 4 शून्यक वाले x² + bx + c में x का गुणांक क्या होगा?","शून्यकों −4 और 4 का गुणनफल क्या है?","कौन-सा मोनिक द्विघात −4 और 4 शून्यक रखता है?","वास्तविक मेहराब k(x² − 16) है और (0, 8) से गुजरता है। k क्या है?"],
+      te:["నీరు ఏ సమయంలో గరిష్ఠ ఎత్తుకు చేరుతుంది?","నీరు చేరే గరిష్ఠ ఎత్తు ఎంత?","నాజిల్‌ను విడిచిన ఎన్ని సెకన్లకు నీరు మళ్లీ నేలను చేరుతుంది (h = 0)?","h(t) = −t² + 6t యొక్క శూన్యాలు ఏమిటి?","ఈ పరవలయం పైకి లేదా కిందికి తెరుచుకుంటుందా? ఎందుకు?","శూన్యాలు −4 మరియు 4 అయితే వాటి మొత్తం ఎంత?","−4 మరియు 4 శూన్యాలున్న x² + bx + cలో x గుణకం ఎంత?","−4 మరియు 4 శూన్యాల గుణఫలం ఎంత?","−4 మరియు 4 శూన్యాలున్న మోనిక్ ద్విఘాతం ఏది?","వాస్తవ తోరణం k(x² − 16), ఇది (0, 8) గుండా వెళుతుంది. k ఎంత?"]
+    };
+    const localizedExplanations={
+      hi:["शीर्ष t = −b/(2a) = 3 सेकंड पर है।","h(3) = −9 + 18 = 9 मीटर।","−t(t−6)=0 से t=0 और t=6; अतः पानी 6 सेकंड में उतरता है।","−t(t−6)=0 से शून्यक 0 और 6 हैं।","t² का गुणांक −1 है, इसलिए परवलय नीचे खुलता है।","−4 + 4 = 0।","शून्यकों का योग −b/a = 0, इसलिए b = 0।","(−4) × 4 = −16।","x² − (योग)x + गुणनफल = x² − 16।","x=0 पर −16k=8, इसलिए k=−1/2।"],
+      te:["శీర్షం t = −b/(2a) = 3 సెకన్ల వద్ద ఉంటుంది.","h(3) = −9 + 18 = 9 మీటర్లు.","−t(t−6)=0 వల్ల t=0, t=6; కాబట్టి 6 సెకన్లకు నీరు నేలను చేరుతుంది.","−t(t−6)=0 వల్ల శూన్యాలు 0 మరియు 6.","t² గుణకం −1 కాబట్టి పరవలయం కిందికి తెరుచుకుంటుంది.","−4 + 4 = 0.","శూన్యాల మొత్తం −b/a = 0 కాబట్టి b = 0.","(−4) × 4 = −16.","x² − (మొత్తం)x + గుణఫలం = x² − 16.","x=0 వద్ద −16k=8 కాబట్టి k=−1/2."]
+    };
+    const optionWords={
+      hi:{"Upward, because a = −1 < 0":"ऊपर, क्योंकि a = −1 < 0","Downward, because a = −1 < 0":"नीचे, क्योंकि a = −1 < 0","Upward, because a = 6 > 0":"ऊपर, क्योंकि a = 6 > 0","Downward, because c = 0":"नीचे, क्योंकि c = 0"},
+      te:{"Upward, because a = −1 < 0":"పైకి, ఎందుకంటే a = −1 < 0","Downward, because a = −1 < 0":"కిందికి, ఎందుకంటే a = −1 < 0","Upward, because a = 6 > 0":"పైకి, ఎందుకంటే a = 6 > 0","Downward, because c = 0":"కిందికి, ఎందుకంటే c = 0"}
+    };
+    if(localizedQuestions[language]){
+      [...exam1,...exam2].forEach((item,index)=>{item.q=localizedQuestions[language][index];item.explain=localizedExplanations[language][index];item.options=item.options.map(option=>optionWords[language][option]||option);});
+    }
 
     interactiveCurve({
       sliderId: "fountain-time", outputId: "fountain-time-out", valueId: "fountain-height", svgId: "fountain-graph",
