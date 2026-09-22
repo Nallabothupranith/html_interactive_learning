@@ -1,7 +1,7 @@
 # HTML Interactive Learning
 
 Interactive, browser-based classroom activities for school learning. The root
-homepage reads `list.json`, shows the catalog, and opens available activity
+homepage reads the generated `list.json` catalog and opens available activity
 variations inside a responsive iframe.
 
 ## Ideas
@@ -12,9 +12,9 @@ Refer below links for Ideas
 
 ## Contributing Activities
 
-Most activities in `list.json` are still missing an HTML implementation. Pick
-one that does not have `activity_path`, create a new folder under `activities/`,
-and build a self-contained `index.html` activity for it.
+Most activity folders are still missing an HTML implementation. Pick one whose
+`activity.md` has no `paths` list, then build a self-contained `index.html` in
+the same folder.
 
 Good activities should be useful for both teachers and students:
 
@@ -32,59 +32,83 @@ Good activities should be useful for both teachers and students:
 ```text
 .
 ├── index.html
-├── list.json
+├── list.json                         # generated; do not edit
+├── scripts/
+│   └── generate_catalog.rb
 └── activities/
     ├── food-detectives/
+    │   ├── activity.md
     │   └── index.html
     └── pythagoras/
+        ├── activity.md
         ├── index.html
         └── 3d/
             └── index.html
 ```
 
-## Updating `list.json`
+## Activity Metadata
 
-When you add an activity, update its catalog entry with `activity_path`.
+Each activity is described by an `activity.md` file beside its HTML file. The
+YAML front matter supplies catalog fields, while the Markdown body supplies the
+activity description.
 
-For one variation:
+```markdown
+---
+order: 1
+class: VI
+subject: Science
+topic: Food
+title: Example Activity
+paths:
+  - label: Interactive
+    path: index.html
+---
 
-```json
-"activity_path": [
-  {
-    "label": "Interactive",
-    "path": "activities/example-activity/index.html"
-  }
-]
+Describe what learners do and what concept the activity demonstrates.
 ```
 
-For multiple variations:
+Paths are relative to `activity.md`, so the usual path is simply `index.html`.
+For multiple variations, add more entries:
 
-```json
-"activity_path": [
-  {
-    "label": "2D Challenge",
-    "path": "activities/example-activity/index.html"
-  },
-  {
-    "label": "3D Interactive",
-    "path": "activities/example-activity/3d/index.html"
-  }
-]
+```yaml
+paths:
+  - label: 2D Challenge
+    path: index.html
+  - label: 3D Interactive
+    path: 3d/index.html
 ```
 
-Use short, student-friendly labels. Paths should be relative to the project
-root.
+Use short, student-friendly labels. External `https://` paths are also
+supported. Do not edit `list.json`; it is generated from all `activity.md`
+files.
+
+To validate metadata without changing the catalog:
+
+```sh
+ruby scripts/generate_catalog.rb --validate
+```
+
+To regenerate and verify the catalog locally:
+
+```sh
+ruby scripts/generate_catalog.rb
+ruby scripts/generate_catalog.rb --check
+```
+
+Pull requests validate the metadata automatically. After a change reaches
+`main`, GitHub Actions regenerates and commits `list.json`.
 
 ## Suggested Workflow
 
-1. Choose a missing activity from `list.json`.
+1. Choose an `activity.md` file that has no `paths` list.
 2. Plan the learner experience: what should the student notice, do, and discuss?
-3. Create a folder such as `activities/my-activity/index.html`.
-4. Build and test the activity at phone, tablet, and desktop widths.
-5. Add one or more `activity_path` variations to the matching `list.json` entry.
-6. Run a local server from the project root:
+3. Add `index.html` beside that metadata file.
+4. Add a `paths` entry to `activity.md`.
+5. Build and test the activity at phone, tablet, and desktop widths.
+6. Validate the metadata and run a local server from the project root:
 
 ```sh
+ruby scripts/generate_catalog.rb
 python3 -m http.server 8000
 ```
 
@@ -97,7 +121,7 @@ Contributions are welcome through pull requests.
 
 Before starting, please create a GitHub issue for the activity you want to build,
 or comment on an existing issue to claim it. Mention the class, subject, topic,
-and activity name from `list.json`. This helps contributors avoid working on the
+and activity name from `activity.md`. This helps contributors avoid working on the
 same activity at the same time.
 
 1. Fork this repository to your own GitHub account.
@@ -109,12 +133,12 @@ same activity at the same time.
 git checkout -b add-my-activity
 ```
 
-5. Add the activity files and update `list.json`.
+5. Add the activity files and update `activity.md`.
 6. Test the homepage and the activity locally.
 7. Commit your changes with a clear message:
 
 ```sh
-git add README.md list.json activities/my-activity/
+git add activities/my-activity/
 git commit -m "Add interactive activity for my topic"
 ```
 

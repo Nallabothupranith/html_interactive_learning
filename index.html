@@ -633,7 +633,7 @@
       activityFrame: document.querySelector("#activityFrame")
     };
 
-    fetch("list.json?v=5",)
+    fetch("list.json", { cache: "no-store" })
       .then((response) => {
         if (!response.ok) {
           throw new Error("Could not load list.json");
