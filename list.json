@@ -1770,7 +1770,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Measurement of Angles",
@@ -1783,7 +1783,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Parallel Lines and a Transversal",
@@ -1796,7 +1796,7 @@
         ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of a Triangle",
@@ -1809,7 +1809,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Mid-point Theorem",
@@ -1822,14 +1822,14 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Basic Proportionality Theorem",
       "activity_details": "Draw a line parallel to one side of a triangle. Verify that it divides the other two sides proportionally."
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Properties of Quadrilaterals",
@@ -1842,21 +1842,21 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Exploring Area with Geoboard",
       "activity_details": "Form rectangles, squares, and right triangles on a geoboard. Count unit squares to find the area."
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Areas of Similar Triangles",
       "activity_details": "Form similar triangles on a geoboard. Compare the ratio of their areas to the ratio of the squares of their corresponding sides."
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Median and Area of a Triangle",
@@ -1869,28 +1869,28 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Triangles on the Same Base and Between Same Parallels",
       "activity_details": "Form triangles on the same base and between the same parallel lines on a geoboard. Verify that their areas are equal."
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Parallelograms on the Same Base and Between Same Parallels",
       "activity_details": "Form parallelograms on the same base and between the same parallel lines on a geoboard. Verify that their areas are equal."
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Areas of Triangle, Parallelogram, and Trapezium",
       "activity_details": "Use cut-outs of triangles and trapeziums to derive the area formulas for triangle, parallelogram, and trapezium."
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Geometry",
       "activity_name": "Pythagoras Theorem",
@@ -1907,7 +1907,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Verification of (a+b)² and (a-b)²",
@@ -1920,14 +1920,14 @@
         ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Verification of a² - b²",
       "activity_details": "Arrange square and trapezium cut-outs to verify a² - b² = (a+b)(a-b)."
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Algebraic Identities",
       "activity_name": "Factorisation of Quadratic Polynomial",
@@ -1940,7 +1940,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Angle Subtended by Chords at Centre",
@@ -1953,7 +1953,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Perpendicular from Centre to Chord",
@@ -1966,7 +1966,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Angle in a Semi-circle",
@@ -1979,7 +1979,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "IX",
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Cyclic Quadrilateral",
@@ -1992,7 +1992,7 @@
       ]
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Geometry (Circles)",
       "activity_name": "Tangents to a Circle",
@@ -2005,14 +2005,14 @@
         ]
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Trigonometry",
       "activity_name": "Trigonometric Ratios",
       "activity_details": "Use a circular board, wire needle, and strips to measure sin θ, cos θ, tan θ, sec θ, cosec θ, and cot θ."
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Trigonometry",
       "activity_name": "Trigonometric Ratios of Special Angles",
@@ -2025,14 +2025,14 @@
         ]
     },
     {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Trigonometry",
       "activity_name": "Verification of Trigonometric Identities",
       "activity_details": "Use the circular board setup to verify identities like sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ."
     },
         {
-      "class": "IX-X",
+      "class": "X",
       "subject": "Mathematics",
       "topic": "Mensuration",
       "activity_name": "Surface Area and Volume of Solids",
