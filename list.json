@@ -2052,12 +2052,29 @@
       "class": "X",
       "subject": "Mathematics",
       "topic": "Real Numbers",
-      "activity_name": "Real Numbers Math Lab",
-      "activity_details": "Complete an interactive mathematics lab practical covering prime factorisation, HCF and LCM, the Fundamental Theorem of Arithmetic, Euclid's division algorithm, and decimal expansions of rational numbers.",
+      "activity_name": "Real Numbers Explorer - HCF, LCM and Decimal Expansions",
+      "activity_details": "Three linked mini-tools for NCERT Class X Chapter 1 (Real Numbers). Students\nfind the HCF of two numbers step by step with Euclid's Division Algorithm,\nbuild a prime-factorisation ladder for two numbers to derive HCF and LCM from\nthe Fundamental Theorem of Arithmetic, and test any fraction to predict -\nbefore dividing - whether its decimal expansion terminates or repeats, based\non the prime factors of the denominator.\n\nA second, five-stage variation (Explore, Learn, Guided Practice, Challenge\nZone, Exam Practice) walks through the same HCF/LCM/prime-factorisation\nskills with a self-paced step-by-step format, a quick multiple-choice\nchallenge, and two self-contained CBSE-style case studies.",
       "activity_path": [
         {
-          "label": "Practical Exam",
-          "path": "activities/lab/10/math/real-numbers/act1/index.html"
+          "label": "Interactive",
+          "path": "activities/real-numbers/index.html"
+        },
+        {
+          "label": "Guided: Explore, Learn & Practice",
+          "path": "activities/real-numbers/guided/index.html"
+        }
+      ]
+    },
+    {
+      "class": "X",
+      "subject": "Mathematics",
+      "topic": "Polynomials",
+      "activity_name": "Polynomials — Guided Path: Parabola Explorer",
+      "activity_details": "A five-stage walk through quadratic polynomials for NCERT Class X Chapter 2.\nStudents drag sliders on a live, auto-scaling parabola to see how the\ncoefficients a, b and c change its shape, zeroes, and vertex; learn the\nrelationship between zeroes and coefficients; practise forming a quadratic\nfrom its zeroes step by step; take a quick multiple-choice challenge; and\nfinish with two self-contained CBSE-style case studies (a fountain's water\npath and a parabolic arch) that need no outside reference material.",
+      "activity_path": [
+        {
+          "label": "Guided: Explore, Learn & Practice",
+          "path": "activities/polynomials/index.html"
         }
       ]
     }
