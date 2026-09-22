@@ -1,4 +1,4 @@
-# HTML Interactive Learning
+# HTML Interactive Learning1
 
 Interactive, browser-based classroom activities for school learning. The root
 homepage reads the generated `list.json` catalog and opens available activity
